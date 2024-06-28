@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/" style={{ display: "flex", alignItems: "center" }}>
           <img src="https://img.icons8.com/fluency/344/green-earth.png" alt="Green Project India" style={{ height: '30px', marginRight: '10px' }} />
-          Green Project India
+          <span style={{fontFamily:"Poppins"}}>Green Project India</span>
         </NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>

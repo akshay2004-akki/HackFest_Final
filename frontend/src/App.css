@@ -28,34 +28,86 @@
   cursor: pointer;
 }
 
+.welcome {
+  background-image: url(./images/pexels-pixabay-40896.jpg);
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  padding: 40px;
+}
+
+.typewriter-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 0.15em solid #00796b;
+  box-sizing: border-box;
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #00796b;
+  }
+}
+
+.landing-page {
+  background-color: #f2f2f2;
+  padding: 50px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 .main-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 40px;
-  padding: 40px;
-  height: 90vh;
-}
-
-.main-content .content h1{
-  font-family: Ubuntu;
-}
-.main-content .content p{
-  font-family: Poppins;
-  font-size: 15px;
 }
 
 .content {
-  max-width: 600px;
+  flex: 1;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.image {
+  flex: 1;
+  text-align: center;
 }
 
 .read-more-button {
-  padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 5px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
   cursor: pointer;
-  margin-top: 20px;
 }
 
+.read-more-button:hover {
+  background-color: #45a049;
+}
+.main-content .content h1{
+  font-family: Ubuntu;
+  color: #4CAF50;
+}
+.main-content .content p{
+  font-family: Poppins;
+  font-size: 20px;
+}
