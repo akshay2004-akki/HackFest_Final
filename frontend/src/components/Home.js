@@ -32,8 +32,8 @@ function Home() {
 
   return (
     <>
-      <div className='welcome' style={{ transform: "translateY(50px)", height: "100vh" }}>
-        <h1 ref={typewriterRef} className="typewriter-text" style={{height:"60px"}}>.</h1>
+      <div className='welcome' style={{ transform: "translateY(50px)", height: "100vh",justifyContent:"center" }}>
+        <h1 ref={typewriterRef} className="typewriter-text" style={{height:"60px", fontFamily:"Barlow", fontSize:"3rem"}}>.</h1>
         <p style={{ marginTop: '20px', fontSize: '1.5rem', maxWidth: '600px' , fontFamily:"Ubuntu"}}>
             At Green Project India, we are dedicated to promoting environmental sustainability. Our mission is to encourage individuals and organizations to take proactive steps in reducing their carbon footprint through our innovative green credit system. Join us in making a positive impact on the environment and earning rewards for your eco-friendly actions.
         </p>
