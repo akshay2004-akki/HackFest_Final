@@ -106,7 +106,7 @@ function Home() {
           </main>
         </div>
       </div> <br />
-      <div className="sustainable" style={{height:"92vh", backgroundColor : "#f2f2f2", padding:"50px",display:"flex", alignItems:"center", objectFit:"contain", overflow:"hidden",transform:"translateY(50px)"}}>
+      <div className="sustainable" style={{height:"92vh", padding:"50px",display:"flex", alignItems:"center", objectFit:"contain", overflow:"hidden",transform:"translateY(50px)"}}>
         <div className="container">
           <main className="main-content2">
             <div className="content2" style={{width:"60%"}}>
@@ -114,14 +114,14 @@ function Home() {
                 Sustainable Banking : <br />
                 Our Green Credit System Helps Banks Go Green
               </h1>
-              <p style={{fontSize:"21px"}}>
+              <div style={{fontSize:"21px"}}>
                 Learn how our green credit system is helping banks across india embrace sustainability, reduce carbon footprint and drive cost saving.
                 <br /> <br />
                 <ul>
                   <li>Green credit system implementation</li>
                   <li>Carbon footprint reduction</li>
                 </ul>
-              </p>
+              </div>
               <button
                 className="read-more-button"
                 style={{ width: "35%", fontSize: "20px", borderRadius:"15px" }}

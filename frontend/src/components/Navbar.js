@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style={{height:"10vh"}}>
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/" style={{ display: "flex", alignItems: "center" }}>
           <img src="https://img.icons8.com/fluency/344/green-earth.png" alt="Green Project India" style={{ height: '30px', marginRight: '10px' }} />
