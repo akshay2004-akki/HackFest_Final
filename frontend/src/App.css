@@ -5,6 +5,7 @@
 .navbar-nav li:hover{
 
   background-color: #6a7fe7;
+  /* background-color: #99999937; */
   transition: all ease-in-out;
   transition-duration: 0.4s;
   border-radius: 15px;
@@ -59,7 +60,7 @@
 }
 
 .landing-page {
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
   padding: 50px 0;
 }
 
@@ -75,7 +76,22 @@
   align-items: center;
 }
 
+.main-content2{
+  display: flex;
+  flex-direction: row-reverse;
+  /* justify-content: space-between; */
+  gap: 50px;
+  align-items: center;
+}
+
 .content {
+  flex: 1;
+  padding-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.content2{
   flex: 1;
   padding-right: 20px;
   display: flex;
@@ -87,6 +103,13 @@
   flex: 1;
   text-align: center;
 }
+.image2 img {
+  width: 80%;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 0 10px black;
+}
+
 
 .read-more-button {
   background-color: #4CAF50;
