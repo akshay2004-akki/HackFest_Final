@@ -41,7 +41,7 @@
   font-weight: bold;
   color: #fff;
   white-space: nowrap;
-  overflow: hidden;
+  text-wrap: wrap;
   border-right: 0.15em solid #00796b;
   box-sizing: border-box;
   animation: blink-caret 0.75s step-end infinite;

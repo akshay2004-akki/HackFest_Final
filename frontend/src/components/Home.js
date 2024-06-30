@@ -54,7 +54,7 @@ function Home() {
         <h1
           ref={typewriterRef}
           className="typewriter-text"
-          style={{ height: "60px", fontFamily: "Barlow", fontSize: "3rem" }}
+          style={{ height: "100px", fontFamily: "Barlow", fontSize: "3rem" }}
         >
           .
         </h1>
@@ -115,7 +115,7 @@ function Home() {
       <div className="sustainable" style={{height:"92vh", padding:"50px",display:"flex", alignItems:"center", objectFit:"contain", overflow:"hidden",transform:"translateY(50px)"}}>
         <div className="container">
           <main className="main-content2">
-            <div className="content2" style={{width:"60%"}}>
+            <div className="content2" style={{width:"100%"}}>
               <h1>
                 Sustainable Banking : <br />
                 Our Green Credit System Helps Banks Go Green
