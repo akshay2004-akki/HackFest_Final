@@ -78,7 +78,7 @@ function Home() {
         className="landing-page"
         style={{ transform: "translateY(60px)", padding: "50px" }}
       >
-        <div className="container">
+        <div>
           <main className="main-content">
             <div className="content">
               <h1>Green Credit</h1>
@@ -113,7 +113,7 @@ function Home() {
         </div>
       </div> <br />
       <div className="sustainable" style={{height:"92vh", padding:"50px",display:"flex", alignItems:"center", objectFit:"contain", overflow:"hidden",transform:"translateY(50px)"}}>
-        <div className="container">
+        <div>
           <main className="main-content2">
             <div className="content2" style={{width:"100%"}}>
               <h1>
