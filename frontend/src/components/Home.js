@@ -54,7 +54,7 @@ function Home() {
         <h1
           ref={typewriterRef}
           className="typewriter-text"
-          style={{ height: "100px", fontFamily: "Barlow", fontSize: "3rem" }}
+          style={{ fontFamily: "Barlow", fontSize: "3rem" }}
         >
           .
         </h1>
