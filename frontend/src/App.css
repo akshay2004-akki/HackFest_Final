@@ -2,15 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;600;700&family=Barlow:wght@400;500;700&display=swap');
 
-.navbar-nav li:hover{
-
+.navbar-nav li:hover {
   background-color: #6a7fe7;
-  /* background-color: #99999937; */
   transition: all ease-in-out;
   transition-duration: 0.4s;
   border-radius: 15px;
 }
-
 
 .nav ul li {
   display: inline;
@@ -35,7 +32,7 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;
   padding: 40px;
 }
 
@@ -60,9 +57,7 @@
 }
 
 .landing-page {
-  /* background-color: #f2f2f2; */
   background: linear-gradient(45deg, #c7f1ca, #ffffff, #9fefa5), linear-gradient(to bottom, rgba(250, 250, 250, 0.548), rgba(185, 228, 185, 0.653));
-  /* background-blend-mode: screen; */
   padding: 50px 0;
 }
 
@@ -72,46 +67,36 @@
   padding: 0 20px;
 }
 
-.main-content {
+.main-content, .main-content2 {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.main-content2{
-  display: flex;
+.main-content2 {
   flex-direction: row-reverse;
-  /* justify-content: space-between; */
-  gap: 50px;
-  align-items: center;
 }
 
-.content {
+.content, .content2 {
   flex: 1;
-  padding-right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.content2{
-  flex: 1;
-  padding-right: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.image {
+.image, .image2 {
   flex: 1;
   text-align: center;
 }
-.image2 img {
-  width: 80%;
+
+.image img, .image2 img {
+  width: 100%;
   height: auto;
   object-fit: contain;
   box-shadow: 0 0 10px #fff;
 }
-
 
 .read-more-button {
   background-color: #4CAF50;
@@ -129,11 +114,13 @@
 .read-more-button:hover {
   background-color: #45a049;
 }
-.main-content .content h1{
+
+.main-content .content h1, .main-content2 .content2 h1 {
   font-family: Ubuntu;
   color: #4CAF50;
 }
-.main-content .content p{
+
+.main-content .content p, .main-content2 .content2 div {
   font-family: Poppins;
   font-size: 20px;
 }
@@ -157,20 +144,13 @@
   justify-content: center;
   width: 100%;
 }
-.footer .about{
+
+.footer .about, .footer .contact {
   display: flex;
-  /* flex-wrap: wrap; */
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
 }
-.footer .contact{
-  display: flex;
-  /* flex-wrap: wrap; */
-  flex-direction: column;
-  align-items: center;
-  justify-content: start;
-}
+
 .footer .footer-section {
   flex: 1;
   padding: 10px 20px;
@@ -181,8 +161,7 @@
   margin-bottom: 10px;
 }
 
-.footer .footer-section p,
-.footer .footer-section ul {
+.footer .footer-section p, .footer .footer-section ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -204,4 +183,69 @@
 .footer-bottom {
   text-align: center;
   margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+  .main-content, .main-content2 {
+    flex-direction: column;
+    text-align: center;
+  }
+  .typewriter-text{
+    text-wrap: wrap;
+  }
+
+  .content, .content2 {
+    padding: 10px;
+  }
+  .main-content2{
+    transform: translateY(50vh);
+    text-align: left;
+  }
+  .footer{
+    transform: translateY(50vh);
+  }
+
+  .image img, .image2 img {
+    width: 100%;
+    height: auto;
+    transform: scale(1);
+  }
+
+  .read-more-button {
+    width: 100%;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .typewriter-text {
+    font-size: 2rem;
+  }
+  .read-more-button{
+    font-size: 10px;
+  }
+  .main-content2 .image{
+    display: none;
+  }
+
+  .main-content .content h1, .main-content2 .content2 h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-content .content p, .main-content2 .content2 div {
+    font-size: 16px;
+  }
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  .footer .footer-section h3 {
+    font-size: 1rem;
+  }
 }

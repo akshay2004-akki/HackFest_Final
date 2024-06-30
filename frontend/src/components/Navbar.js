@@ -24,6 +24,9 @@ function Navbar() {
               <NavLink className="nav-link" to="/contact">Contact</NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/tasks">Task</NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/login">Login</NavLink>
             </li>
             <li className="nav-item">

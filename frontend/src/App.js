@@ -9,6 +9,7 @@ import Login from './components/Login.js';
 import Signup from './components/Signup.js';
 import Home from './components/Home.js';
 import Footer from './components/Footer.js';
+import Tasks from './components/Tasks.js';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/service" element={<Service />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path='/tasks' element = {<Tasks/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

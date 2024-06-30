@@ -2,7 +2,9 @@ import React from 'react'
 
 function Service() {
   return (
-    <div>Service</div>
+    <div style={{transform:"translateY(70px)"}}>
+      Service
+    </div>
   )
 }
 

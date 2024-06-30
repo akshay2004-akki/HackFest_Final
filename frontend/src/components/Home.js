@@ -16,22 +16,28 @@ function Home() {
     const startTyping = () => {
       charIndex = 0;
       interval = setInterval(() => {
-        if (charIndex <= typewriterText.length) {
-          typewriterRef.current.textContent = typewriterText.substring(
-            0,
-            charIndex
-          );
-          charIndex++;
+        if (typewriterRef.current) {
+          if (charIndex <= typewriterText.length) {
+            typewriterRef.current.textContent = typewriterText.substring(
+              0,
+              charIndex
+            );
+            charIndex++;
+          } else {
+            clearInterval(interval);
+            setTimeout(startTyping, delay); // restart after delay
+          }
         } else {
           clearInterval(interval);
-          setTimeout(startTyping, delay); // restart after delay
         }
       }, speed);
     };
 
     startTyping();
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -91,7 +97,7 @@ function Home() {
               </p>
               <button
                 className="read-more-button"
-                style={{ width: "25%", fontSize: "20.5px" }}
+                style={{ width: "30%", fontSize: "20.5px" }}
               >
                 Read More
               </button>
@@ -133,7 +139,7 @@ function Home() {
               <img
                 src={solar}
                 alt="Green Credit Card"
-                // style={{ width: "100%", height:"100%" }}
+                style={{ width: "100%", height:"100%" }}
               />
             </div>
           </main>
