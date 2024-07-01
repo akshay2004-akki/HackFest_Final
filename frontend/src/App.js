@@ -16,15 +16,15 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path='/' element = {<Home/>}/>
-        <Route path="/service" element={<Service />} />
-        <Route path="/about" element={<About />} />
+        <Route path='/' element = { <> <Home/> <Footer/></> }></Route>
+        <Route path="/service" element={ <><Service /> <Footer/> </> }></Route>
+        <Route path="/about" element={<><About /> <Footer/></>} />
         <Route path="/contact" element={<ContactUs />} />
-        <Route path='/tasks' element = {<Tasks/>}/>
+        <Route path='/tasks' element = {<> <Tasks/> <Footer/> </>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
     </Router>
   );
 }
