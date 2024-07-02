@@ -4,7 +4,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <footer className="footer" style={{transform:"translateY(70px)",height:"40vh", display:"flex", alignItems:"center"}}>
+    <footer className="footer" style={{transform:"translateY(70px)", display:"flex", alignItems:"center"}}>
       <div className="container">
         <div className="footer-content">
           <div className="footer-section about">

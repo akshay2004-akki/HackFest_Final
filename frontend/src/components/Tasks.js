@@ -43,7 +43,7 @@ function Tasks() {
     setCheckedTasks(newCheckedTasks);
   };
   return (
-    <div style={{transform:"translateY(50px)"}}>
+    <div style={{transform:"translateY(90px)"}}>
       <div className="tasks-container">
       <h2>Tasks to Reduce Your Carbon Footprint</h2>
       <ul className="tasks-list">

@@ -32,20 +32,25 @@
   background-size: cover;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  height: 100vh;
 }
 
 .typewriter-text {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #fff;
   white-space: nowrap;
-  height: 50px;
-  text-wrap: wrap;
   border-right: 0.15em solid #00796b;
   box-sizing: border-box;
   animation: blink-caret 0.75s step-end infinite;
+  font-family: Poppins;
+  height: 10%;
+  text-wrap: wrap;
+  font-family: Ubuntu;
 }
 
 @keyframes blink-caret {
@@ -58,8 +63,11 @@
 }
 
 .landing-page {
-  background: linear-gradient(to bottom, #ffffff, #9feca4, #ffffff), linear-gradient(to bottom, rgba(250, 250, 250, 0.548), rgba(185, 228, 185, 0.653));
-  padding: 50px 0;
+  background: linear-gradient(to bottom, #ffffff, #9feca4, #ffffff);
+  padding: 50px 20px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .container {
@@ -95,242 +103,89 @@
 .image img, .image2 img {
   width: 100%;
   height: auto;
-  object-fit: contain;
-  box-shadow: 0 0 10px #fff;
 }
 
 .read-more-button {
-  background-color: #4CAF50;
+  padding: 15px 25px;
+  font-size: 1rem;
+  background-color: #4caf50;
   color: white;
   border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-top: 10px;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 10px;
+  transition: background-color 0.3s ease;
 }
 
 .read-more-button:hover {
-  background-color: #45a049;
+  background-color: #388e3c;
 }
 
-.main-content .content h1, .main-content2 .content2 h1 {
-  font-family: Ubuntu;
-  color: #4CAF50;
+.sustainable {
+  padding-top: 50px;
+  background: linear-gradient(to bottom, #fff, #e0f7fa 50%, #fff);
 }
 
-.main-content .content p, .main-content2 .content2 div {
-  font-family: Poppins;
-  font-size: 20px;
+@media (max-width : 1024px){
+  .landing-page{
+    transform: translateY(25%);
+  }
+  .sustainable{
+    transform: translateY(20%);
+  }
+  .footer{
+    transform: translateY(10%);
+  }
 }
 
-.footer {
-  /* background: linear-gradient(to, #a1d9ab, #5fd667, #7bef7f, #5cde64, #99eaa1); */
-  background: linear-gradient(to bottom, #ffffff,rgb(241, 206, 141),  #ffffff, rgb(121, 244, 121));
-  color: #111;
-  padding: 20px 0;
-}
-
-.footer .container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.footer .footer-content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.footer .about, .footer .contact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.footer .footer-section {
-  flex: 1;
-  padding: 10px 20px;
-  min-width: 200px;
-}
-
-.footer .footer-section h3 {
-  margin-bottom: 10px;
-}
-
-.footer .footer-section p, .footer .footer-section ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.footer .footer-section ul li {
-  margin-bottom: 5px;
-}
-
-.footer .footer-section ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-.footer .footer-section ul li a:hover {
-  text-decoration: underline;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-}
-
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
   .main-content, .main-content2 {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
   }
-  .typewriter-text{
-    text-wrap: wrap;
+
+  .typewriter-text {
+    font-size: 2rem;
   }
 
   .content, .content2 {
     padding: 10px;
   }
-  .main-content2{
-    transform: translateY(40vh);
-    text-align: left;
-  }
-  .footer{
-    transform: translateY(50vh);
-  }
-
-  .image img, .image2 img {
-    width: 100%;
-    height: auto;
-    transform: scale(1);
-  }
 
   .read-more-button {
     width: 100%;
-    font-size: 18px;
-  }
-}
-
-@media (max-width: 768px) {
-
-  .typewriter-text {
-    font-size: 2rem;
-  }
-  .read-more-button{
-    font-size: 10px;
-  }
-  .main-content2 .image{
-    display: none;
-  }
-
-  .main-content .content h1, .main-content2 .content2 h1 {
-    font-size: 1.5rem;
-  }
-
-  .main-content .content p, .main-content2 .content2 div {
-    font-size: 16px;
-    text-align: left;
-    padding: 0 0 0 0;
-  }
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer-section {
-    text-align: center;
-    padding: 10px 0;
-  }
-
-  .footer .footer-section h3 {
     font-size: 1rem;
+    padding: 10px;
+    margin-top: 20px;
+  }
+
+  .welcome {
+    padding: 20px;
+  }
+
+  .landing-page {
+    padding: 20px 10px;
+    padding-top: 70px;
+  }
+
+  .image img, .image2 img {
+    max-width: 100%;
+    height: auto;
   }
 }
-
 
 @media (max-width: 480px) {
-  .footer-section {
-    padding: 5px 10px;
-  }
-
-  .footer-section h3 {
-    font-size: 1.2rem;
-  }
-
-  .footer-section p {
-    font-size: 0.9rem;
-  }
-
-  .footer-bottom {
-    font-size: 0.8rem;
-    margin-top: 10px;
-  }
-  .welcome, .landing-page, .sustainable {
-    padding: 0px;
-  }
-
-  .main-content, .main-content2 {
-    flex-direction: column;
-    align-items: center;
-    padding: 0px;
-  }
-  .main-content2{
-    transform: translateY(190px);
-    padding: 0px;
-  }
-
-  .content, .content2 {
-    padding: 0px;
-    text-wrap: wrap;
-  }
-
-  .image img, .image2 img {
-    width: 100%;
-    height: auto;
-  }
-
   .typewriter-text {
     font-size: 1.5rem;
-    height: 150px;
   }
 
   .read-more-button {
-    width: 100%;
-    font-size: 16px;
-  }
-}
-
-@media (max-width : 387px){
-  .main-content2{
-    transform: translateY(170px);
-    padding: 0;
-  }
-  .read-more-button{
-    padding: 3px;
-  }
-  .content2 div{
-    font-size: 23px;
+    font-size: 0.875rem;
   }
 }
 
 .services-section {
   padding: 50px 20px;
   background: linear-gradient(to bottom , #fff, rgba(118, 239, 118, 0.619), #fff) ;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 .section-title {
@@ -385,12 +240,6 @@
   background-color: #f9f9f9;
   padding: 50px 20px;
   color: #333;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
 }
 
 .about-section h2 {
@@ -454,13 +303,11 @@
 }
 
 .contact-container {
-  /* max-width: 600px; */
   width: 40%;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
-  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .contact-container h2 {
@@ -506,23 +353,6 @@
   background-color: #45a049;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-  .contact-container {
-    padding: 10px;
-  }
-
-  .contact-form input,
-  .contact-form textarea {
-    padding: 8px;
-  }
-
-  .submit-button {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-}
-
 /* Common styles for both forms */
 .form-container {
   display: flex;
@@ -537,10 +367,9 @@
 .form-box {
   background: none;
   backdrop-filter: blur(3px);
-
   padding: 40px;
   border-radius: 10px;
-  box-shadow: 0 0px 10px #fff;
+  box-shadow: 0 0 10px #fff;
   max-width: 400px;
   width: 100%;
   box-sizing: border-box;
@@ -612,7 +441,6 @@
   box-shadow: 0 0 20px #fff;
   padding: 40px;
   border-radius: 10px;
-  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); */
   max-width: 400px;
   width: 100%;
   box-sizing: border-box;
@@ -651,23 +479,6 @@
 .form-box2 .submit-button:hover {
   background-color: #45a049;
 }
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .form-box2 {
-    padding: 20px;
-  }
-
-  .form-box2 h2 {
-    font-size: 1.5rem;
-  }
-
-  .form-box2 .submit-button {
-    font-size: 1rem;
-  }
-}
-
-/* src/components/Tasks.css */
 
 .tasks-container {
   padding: 20px;
@@ -732,4 +543,134 @@
 
 .task-item input[type='checkbox'] {
   margin-right: 10px;
+}
+
+
+.footer {
+  color: #111;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(70px);
+  background: linear-gradient(to bottom,#fff, #f3c067, #ffffff, #42f242);
+
+  /* height: 40vh; */
+}
+
+.footer .container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.footer .footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.footer .footer-section {
+  flex: 1 1 45%;
+  margin: 10px;
+  box-sizing: border-box;
+}
+
+.footer .footer-section h3 {
+  margin-bottom: 10px;
+}
+
+.footer .footer-section p {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .footer .footer-section {
+    flex: 1 1 100%;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer .footer-section h3 {
+    font-size: 1.25rem;
+  }
+
+  .footer .footer-section p {
+    font-size: 0.9rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.9rem;
+  }
+}
+
+
+/* Green credit card form*/
+
+.green-credit-form-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.green-credit-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.green-credit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.green-credit-form-group {
+  margin-bottom: 15px;
+}
+
+.green-credit-form-group label {
+  margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+}
+
+.green-credit-form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.green-credit-submit-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.green-credit-submit-btn:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 480px) {
+  .green-credit-form-container {
+    padding: 10px;
+  }
 }

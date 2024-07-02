@@ -10,6 +10,7 @@ import Signup from './components/Signup.js';
 import Home from './components/Home.js';
 import Footer from './components/Footer.js';
 import Tasks from './components/Tasks.js';
+import GreenCreditCardForm from './components/GreenCreditCardForm.js';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/tasks' element = {<> <Tasks/> <Footer/> </>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/apply-green-credit" element={<GreenCreditCardForm/>} />
       </Routes>
     </Router>
   );

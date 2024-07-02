@@ -1,9 +1,19 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import greeCreditCard from "../images/realistic-credit-card-mockup-natural-background_71042-532.jpg";
-import solar from '../images/soloar greenry.jpg'
+import solar from '../images/soloar greenry.jpg';
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const typewriterRef = useRef(null);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const route = useNavigate()
+  const handleApply = ()=>{
+    if(!isLoggedIn){
+      route("/login")
+    }
+    route("/apply-green-credit")
+  }
 
   useEffect(() => {
     const typewriterText = "Welcome to Green Project India";
@@ -42,30 +52,9 @@ function Home() {
 
   return (
     <>
-      <div
-        className="welcome"
-        style={{
-          transform: "translateY(50px)",
-          height: "100vh",
-          justifyContent: "center",
-          padding:"50px"
-        }}
-      >
-        <h1
-          ref={typewriterRef}
-          className="typewriter-text"
-          style={{ fontFamily: "Barlow", fontSize: "3rem" }}
-        >
-          .
-        </h1>
-        <p
-          style={{
-            marginTop: "20px",
-            fontSize: "1.5rem",
-            maxWidth: "600px",
-            fontFamily: "Ubuntu",
-          }}
-        >
+      <div className="welcome" style={{transform:"translateY(50px)"}}>
+        <h1 ref={typewriterRef} className="typewriter-text">.</h1>
+        <p style={{fontSize:"21px", fontFamily:"Poppins"}}>
           At Green Project India, we are dedicated to promoting environmental
           sustainability. Our mission is to encourage individuals and
           organizations to take proactive steps in reducing their carbon
@@ -74,15 +63,12 @@ function Home() {
           your eco-friendly actions.
         </p>
       </div>
-      <div
-        className="landing-page"
-        style={{ transform: "translateY(60px)", padding: "50px" }}
-      >
-        <div>
+      <div className="landing-page">
+        <div className="container">
           <main className="main-content">
             <div className="content">
-              <h1>Green Credit</h1>
-              <p>
+              <h1 style={{fontFamily:"Ubuntu"}}>Green Credit</h1>
+              <p style={{fontFamily:"Poppins"}}>
                 At Green Project India, we believe that promoting environmental
                 sustainability is everyone's responsibility. That's why we've
                 developed an innovative green credit management system that
@@ -95,52 +81,35 @@ function Home() {
                 bonuses, and other benefits at partner outlets, making it a
                 win-win for both individuals and the environment.
               </p>
-              <button
-                className="read-more-button"
-                style={{ width: "30%", fontSize: "20.5px" }}
-              >
-                Read More
-              </button>
+              <span style={{display:"flex", gap:"40px"}}><button className="read-more-button">Read More</button> <button className="read-more-button" onClick={handleApply}>Apply</button></span>
             </div>
             <div className="image">
-              <img
-                src={greeCreditCard}
-                alt="Green Credit Card"
-                style={{ height: "100%", width: "100%" }}
-              />
+              <img src={greeCreditCard} alt="Green Credit Card" />
             </div>
           </main>
         </div>
-      </div> <br />
-      <div className="sustainable" style={{height:"92vh", padding:"50px",display:"flex", alignItems:"center", objectFit:"contain", overflow:"hidden",transform:"translateY(50px)"}}>
-        <div>
+      </div>
+      <div className="sustainable">
+        <div className="container">
           <main className="main-content2">
-            <div className="content2" style={{width:"100%"}}>
+            <div className="content2">
               <h1>
-                Sustainable Banking : <br />
+                Sustainable Banking: <br />
                 Our Green Credit System Helps Banks Go Green
               </h1>
-              <div style={{fontSize:"21px"}}>
-                Learn how our green credit system is helping banks across india embrace sustainability, reduce carbon footprint and drive cost saving.
-                <br /> <br />
-                <ul>
-                  <li>Green credit system implementation</li>
-                  <li>Carbon footprint reduction</li>
-                </ul>
-              </div>
-              <button
-                className="read-more-button"
-                style={{ width: "35%", fontSize: "20px", borderRadius:"15px" }}
-              >
-                Read More
-              </button>
+              <p>
+                Learn how our green credit system is helping banks across India
+                embrace sustainability, reduce carbon footprint, and drive cost
+                savings.
+              </p>
+              <ul>
+                <li>Green credit system implementation</li>
+                <li>Carbon footprint reduction</li>
+              </ul>
+              <button className="read-more-button">Read More</button>
             </div>
             <div className="image2">
-              <img
-                src={solar}
-                alt="Green Credit Card"
-                style={{ width: "100%", height:"100%" }}
-              />
+              <img src={solar} alt="Solar Greenery" />
             </div>
           </main>
         </div>
