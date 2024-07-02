@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const typewriterRef = useRef(null);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const route = useNavigate()
   const handleApply = ()=>{
     if(!isLoggedIn){
