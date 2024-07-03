@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import './Tasks.css'; // Assuming you have some CSS for the task list
 
 const tasksList = [
   'Use public transportation instead of driving',
@@ -33,36 +35,100 @@ const tasksList = [
   'Advocate for environmental policies'
 ];
 
+function Tasks({ credit, setCredit }) {
+  const [checkedTasks, setCheckedTasks] = useState(() => {
+    const storedCheckedTasks = JSON.parse(localStorage.getItem('checkedTasks'));
+    return storedCheckedTasks || new Array(tasksList.length).fill(false);
+  });
 
-function Tasks() {
-  const [checkedTasks, setCheckedTasks] = useState(new Array(tasksList.length).fill(false));
+  const [uploadedImages, setUploadedImages] = useState(() => {
+    const storedUploadedImages = JSON.parse(localStorage.getItem('uploadedImages'));
+    return storedUploadedImages || new Array(tasksList.length).fill(null);
+  });
+
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    localStorage.setItem('numberOfTasks',tasksList.length)
+  },[])
+
+  useEffect(() => {
+    const storedCredit = JSON.parse(localStorage.getItem('credit'));
+    if (storedCredit !== null) {
+      setCredit(storedCredit);
+    }
+  }, [setCredit]);
+
+  useEffect(() => {
+    localStorage.setItem('checkedTasks', JSON.stringify(checkedTasks));
+  }, [checkedTasks]);
+
+  useEffect(() => {
+    localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
+  }, [uploadedImages]);
+
+  useEffect(() => {
+    localStorage.setItem('credit', JSON.stringify(credit));
+  }, [credit]);
 
   const handleCheckboxChange = (index) => {
-    const newCheckedTasks = [...checkedTasks];
-    newCheckedTasks[index] = !newCheckedTasks[index];
-    setCheckedTasks(newCheckedTasks);
+    if (uploadedImages[index]) {
+      const newCheckedTasks = [...checkedTasks];
+      newCheckedTasks[index] = !newCheckedTasks[index];
+      setCheckedTasks(newCheckedTasks);
+
+      setTimeout(() => {
+        if (newCheckedTasks[index]) {
+          setCredit(prevCred => prevCred + 10);
+        } else {
+          setCredit(prevCred => prevCred - 10);
+        }
+      }, 1000);
+    } else {
+      alert('Please upload an image to complete the task.');
+    }
   };
+
+  const handleImageUpload = (index, event) => {
+    const newUploadedImages = [...uploadedImages];
+    newUploadedImages[index] = event.target.files[0];
+    setUploadedImages(newUploadedImages);
+  };
+
+  const handleCreditNavigate = () => {
+    navigate("/check-credit-score");
+  };
+
   return (
-    <div style={{transform:"translateY(90px)"}}>
-      <div className="tasks-container">
-      <h2>Tasks to Reduce Your Carbon Footprint</h2>
-      <ul className="tasks-list">
-        {tasksList.map((task, index) => (
-          <li key={index} className={`task-item ${checkedTasks[index] ? 'completed' : ''}`}>
-            <label>
-              <input
-                type="checkbox"
-                checked={checkedTasks[index]}
-                onChange={() => handleCheckboxChange(index)}
-              />
-              {task}
-            </label>
-          </li>
-        ))}
-      </ul>
-    </div>
-    </div>
-  )
+    <>
+      <div style={{ transform: 'translateY(90px)' }}>
+        <div className="tasks-container">
+          <h2>Tasks to Reduce Your Carbon Footprint</h2>
+          <ul className="tasks-list">
+            {tasksList.map((task, index) => (
+              <li key={index} className={`task-item ${checkedTasks[index] ? 'completed' : ''}`}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={checkedTasks[index]}
+                    onChange={() => handleCheckboxChange(index)}
+                    disabled={checkedTasks[index]}
+                  />
+                  {task}
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(event) => handleImageUpload(index, event)}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <button className='btn btn-success credit-score' onClick={handleCreditNavigate}>Check credit score</button>
+    </>
+  );
 }
 
-export default Tasks
+export default Tasks;

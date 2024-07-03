@@ -674,3 +674,42 @@
     padding: 10px;
   }
 }
+
+
+.credit-score{
+  position: fixed;
+    top: 60px;
+    left: 20px;
+    padding: 10px 20px;
+    /* background-color: #f8f9fa; */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Optional: Add styles for the label of disabled checkboxes */
+.task-item.completed label {
+  text-decoration: line-through;
+  color: grey;
+}
+
+svg {
+  display: block;
+  margin: 20px auto;
+}
+
+circle {
+  transition: stroke-dashoffset 0.35s;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+text {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
