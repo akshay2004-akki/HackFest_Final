@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react';
 // import './CircularProgress.css';
 
 function CircularProgress({ percentage }) {
-  const radius = 80; // Increased radius for a larger circle
-  const stroke = 12; // Increased stroke width
+  const radius = 100; // Increased radius for a larger circle
+  const stroke = 14; // Increased stroke width
   const normalizedRadius = radius - stroke * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;

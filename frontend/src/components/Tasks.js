@@ -71,10 +71,13 @@ function Tasks({ credit, setCredit }) {
     localStorage.setItem('credit', JSON.stringify(credit));
   }, [credit]);
 
-  const handleCheckboxChange = (index) => {
+  const handleCheckboxChange = (index,e) => {
+    
     if (uploadedImages[index]) {
       const newCheckedTasks = [...checkedTasks];
+      // const completedTask = [...checkedTasks]
       newCheckedTasks[index] = !newCheckedTasks[index];
+      // completedTask[index] = e.target.value
       setCheckedTasks(newCheckedTasks);
 
       setTimeout(() => {
@@ -98,6 +101,10 @@ function Tasks({ credit, setCredit }) {
   const handleCreditNavigate = () => {
     navigate("/check-credit-score");
   };
+  useEffect(()=>{
+    const completedTasks = tasksList.filter((task, index) => checkedTasks[index]);
+    localStorage.setItem('tasksCompleted', JSON.stringify(completedTasks));
+  },[checkedTasks])
 
   return (
     <>
@@ -111,7 +118,7 @@ function Tasks({ credit, setCredit }) {
                   <input
                     type="checkbox"
                     checked={checkedTasks[index]}
-                    onChange={() => handleCheckboxChange(index)}
+                    onChange={(e) => handleCheckboxChange(index,e)}
                     disabled={checkedTasks[index]}
                   />
                   {task}
