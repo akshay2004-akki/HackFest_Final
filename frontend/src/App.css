@@ -713,3 +713,74 @@ text {
   font-family: Arial, sans-serif;
   font-weight: bold;
 }
+
+/* Rewards */
+.rewards-container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: flex-start;
+  margin: 20px;
+  transform: translateY(60px);
+}
+
+.category-section {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.category-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.rewards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.reward-box {
+  background: #f9f9f9;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  width: 200px;
+  padding: 15px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.reward-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.reward-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.reward-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.reward-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.reward-points {
+  font-size: 16px;
+  font-weight: bold;
+  color: #27ae60;
+}

@@ -12,6 +12,7 @@ import Footer from './components/Footer.js';
 import Tasks from './components/Tasks.js';
 import GreenCreditCardForm from './components/GreenCreditCardForm.js';
 import CreditScore from './components/CreditScore.js';
+import Rewards from './components/Rewards.js';
 
 function App() {
   const [credit, setCredit] = useState(() => JSON.parse(localStorage.getItem('credit')) || 0);
@@ -32,6 +33,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/apply-green-credit" element={<GreenCreditCardForm/>} />
         <Route path='/check-credit-score' element = { <CreditScore credit={credit} /> } />
+        <Route path="/rewards" element={<Rewards />} />
       </Routes>
     </Router>
   );
