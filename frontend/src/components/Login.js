@@ -1,6 +1,10 @@
 import React from 'react'
 
 function Login() {
+
+  const users=JSON.parse(localStorage.getItem("users"));
+  console.log(users);
+
   return (
     <div style={{transform:"translateY(50px)"}}>
       <div className="form-container">

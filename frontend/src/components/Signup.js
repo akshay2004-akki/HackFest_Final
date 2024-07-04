@@ -12,6 +12,7 @@ function Signup() {
     const savedUsers = localStorage.getItem("users");
     return savedUsers ? JSON.parse(savedUsers) : [];
   });
+  const [error, setError] = useState("");
   useEffect(() => {
     console.log(users);
     localStorage.setItem("users", JSON.stringify(users));
@@ -23,10 +24,20 @@ function Signup() {
       ...user,
       [e.target.name]: e.target.value,
     });
+    setError("");
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUsers((prevUsers) => [...prevUsers, user]);
+    const duplicateUser = users.find(
+      (u) => u.username === user.username || u.email === user.email
+    );
+    if (duplicateUser) {
+      setError("Username or email already exists.");
+      alert(error)
+    } 
+    else{
+      setUsers((prevUsers) => [...prevUsers, user]);
+    }
   };
 
   return (
