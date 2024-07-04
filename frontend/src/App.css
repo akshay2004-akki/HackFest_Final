@@ -479,6 +479,15 @@
 .form-box2 .submit-button:hover {
   background-color: #45a049;
 }
+.select-field {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
 
 .tasks-container {
   padding: 20px;
