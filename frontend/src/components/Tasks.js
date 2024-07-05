@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import './Tasks.css'; // Assuming you have some CSS for the task list
 
 const tasksList = [
   'Use public transportation instead of driving',
@@ -35,51 +34,44 @@ const tasksList = [
   'Advocate for environmental policies'
 ];
 
-function Tasks({ credit, setCredit }) {
+function Tasks({ credit, setCredit, user }) {
   const [checkedTasks, setCheckedTasks] = useState(() => {
-    const storedCheckedTasks = JSON.parse(localStorage.getItem('checkedTasks'));
+    const storedCheckedTasks = JSON.parse(localStorage.getItem(`${user.email}_checkedTasks`));
     return storedCheckedTasks || new Array(tasksList.length).fill(false);
   });
 
   const [uploadedImages, setUploadedImages] = useState(() => {
-    const storedUploadedImages = JSON.parse(localStorage.getItem('uploadedImages'));
+    const storedUploadedImages = JSON.parse(localStorage.getItem(`${user.email}_uploadedImages`));
     return storedUploadedImages || new Array(tasksList.length).fill(null);
   });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem('numberOfTasks', tasksList.length);
-  }, []);
+    localStorage.setItem(`${user.email}_numberOfTasks`, tasksList.length);
+  }, [user.email]);
 
   useEffect(() => {
-    const storedCredit = JSON.parse(localStorage.getItem('credit'));
-    if (storedCredit !== null) {
-      setCredit(storedCredit);
-    }
-  }, [setCredit]);
+    localStorage.setItem(`${user.email}_checkedTasks`, JSON.stringify(checkedTasks));
+  }, [checkedTasks, user.email]);
 
   useEffect(() => {
-    localStorage.setItem('checkedTasks', JSON.stringify(checkedTasks));
-  }, [checkedTasks]);
-
-  useEffect(() => {
-    localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
-  }, [uploadedImages]);
+    localStorage.setItem(`${user.email}_uploadedImages`, JSON.stringify(uploadedImages));
+  }, [uploadedImages, user.email]);
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    const tasks = JSON.parse(localStorage.getItem("tasksCompleted"))
+    const tasks = JSON.parse(localStorage.getItem(`${user?.email}_tasksCompleted`));
     if (loggedInUser) {
       const updatedUser = { ...loggedInUser, credit, tasks };
       localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-      const users = JSON.parse(localStorage.getItem('users')).map(user =>
-        user.email === loggedInUser.email ? updatedUser : user
+      const users = JSON.parse(localStorage.getItem('users')).map(u =>
+        u.email === loggedInUser?.email ? updatedUser : u
       );
       localStorage.setItem('users', JSON.stringify(users));
     }
-    localStorage.setItem('credit', JSON.stringify(credit));
-  }, [credit]);
+    localStorage.setItem(`${user?.email}_credit`, JSON.stringify(credit));
+  }, [credit, user.email]);
 
   const handleCheckboxChange = (index) => {
     if (uploadedImages[index]) {
@@ -111,8 +103,8 @@ function Tasks({ credit, setCredit }) {
 
   useEffect(() => {
     const completedTasks = tasksList.filter((task, index) => checkedTasks[index]);
-    localStorage.setItem('tasksCompleted', JSON.stringify(completedTasks));
-  }, [checkedTasks]);
+    localStorage.setItem(`${user?.email}_tasksCompleted`, JSON.stringify(completedTasks));
+  }, [checkedTasks, user?.email]);
 
   return (
     <>

@@ -33,7 +33,7 @@ function Navbar({ isLoggedIn, user }) {
               <NavLink className={`nav-link ${isLoggedIn ? "d-none" : ""}`} to="/signup">Signup</NavLink>
             </li>
             <li className="nav-item" style={{ borderRadius: "50%" }}>
-              <NavLink className={`nav-link bg-light ${!isLoggedIn ? "d-none" : ""}`} to="/profile" style={{ borderRadius: "50%", color: "black" }}>{user.username?.slice(0, 2)}</NavLink>
+              <NavLink className={`nav-link bg-light ${!isLoggedIn ? "d-none" : ""}`} to="/profile" style={{ borderRadius: "50%", color: "black" }}>{user?.username?.slice(0, 2)}</NavLink>
             </li>
           </ul>
         </div>
