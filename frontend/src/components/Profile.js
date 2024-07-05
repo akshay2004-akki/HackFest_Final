@@ -6,14 +6,14 @@ import CircularProgress from './CircularProgress';
 function Profile({ setIsLoggedIn }) {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  const credit = user ? JSON.parse(localStorage.getItem(`${user?.email}_credit`)) || 0 : 0;
-  const noOfTasks = JSON.parse(localStorage.getItem(`${user?.email}_numberOfTasks`)) || 1; // Avoid division by zero
+  const credit = user ? user.credit : 0;
+  const noOfTasks = JSON.parse(localStorage.getItem('numberOfTasks')) || 1; // Avoid division by zero
   let creditInPercentage = Math.floor((credit / (noOfTasks * 10)) * 100);
   if (isNaN(creditInPercentage)) {
     creditInPercentage = 0;
   }
 
-  const completedTask = JSON.parse(localStorage.getItem(`${user?.email}_tasksCompleted`)) || [];
+  const completedTask = JSON.parse(localStorage.getItem("users"))?.find((u) => u.email === user.email)?.tasks || [];
 
   const route = useNavigate();
   const handleLogout = () => {
@@ -24,7 +24,7 @@ function Profile({ setIsLoggedIn }) {
   };
 
   return (
-    <div className="profile-container" style={{ transform: "translateY(90px)" }}>
+    <div className="profile-container" style={{transform:"translateY(90px)"}}>
       <div className="username">{user?.username}</div>
       <button className="btn btn-danger logout-btn" onClick={handleLogout}>Logout</button>
       <div className="progress-container">

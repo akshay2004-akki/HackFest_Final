@@ -36,49 +36,50 @@ const tasksList = [
 ];
 
 function Tasks({ credit, setCredit }) {
-  const user = JSON.parse(localStorage.getItem("loggedInUser"));
-  const email = user.email;
-
   const [checkedTasks, setCheckedTasks] = useState(() => {
-    const storedCheckedTasks = JSON.parse(localStorage.getItem(`${email}_checkedTasks`));
+    const storedCheckedTasks = JSON.parse(localStorage.getItem('checkedTasks'));
     return storedCheckedTasks || new Array(tasksList.length).fill(false);
   });
 
   const [uploadedImages, setUploadedImages] = useState(() => {
-    const storedUploadedImages = JSON.parse(localStorage.getItem(`${email}_uploadedImages`));
+    const storedUploadedImages = JSON.parse(localStorage.getItem('uploadedImages'));
     return storedUploadedImages || new Array(tasksList.length).fill(null);
   });
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem(`${email}_numberOfTasks`, tasksList.length);
-  }, [email]);
+    localStorage.setItem('numberOfTasks', tasksList.length);
+  }, []);
 
   useEffect(() => {
-    const storedCredit = JSON.parse(localStorage.getItem(`${email}_credit`));
+    const storedCredit = JSON.parse(localStorage.getItem('credit'));
     if (storedCredit !== null) {
       setCredit(storedCredit);
     }
-  }, [setCredit, email]);
+  }, [setCredit]);
 
   useEffect(() => {
-    localStorage.setItem(`${email}_checkedTasks`, JSON.stringify(checkedTasks));
-  }, [checkedTasks, email]);
+    localStorage.setItem('checkedTasks', JSON.stringify(checkedTasks));
+  }, [checkedTasks]);
 
   useEffect(() => {
-    localStorage.setItem(`${email}_uploadedImages`, JSON.stringify(uploadedImages));
-  }, [uploadedImages, email]);
+    localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
+  }, [uploadedImages]);
 
   useEffect(() => {
-    const updatedUser = { ...user, credit, tasks: checkedTasks };
-    localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-    const users = JSON.parse(localStorage.getItem('users')).map(user =>
-      user.email === email ? updatedUser : user
-    );
-    localStorage.setItem('users', JSON.stringify(users));
-    localStorage.setItem(`${email}_credit`, JSON.stringify(credit));
-  }, [credit, checkedTasks, user, email]);
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    const tasks = JSON.parse(localStorage.getItem("tasksCompleted"))
+    if (loggedInUser) {
+      const updatedUser = { ...loggedInUser, credit, tasks };
+      localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+      const users = JSON.parse(localStorage.getItem('users')).map(user =>
+        user.email === loggedInUser.email ? updatedUser : user
+      );
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+    localStorage.setItem('credit', JSON.stringify(credit));
+  }, [credit]);
 
   const handleCheckboxChange = (index) => {
     if (uploadedImages[index]) {
@@ -110,8 +111,8 @@ function Tasks({ credit, setCredit }) {
 
   useEffect(() => {
     const completedTasks = tasksList.filter((task, index) => checkedTasks[index]);
-    localStorage.setItem(`${email}_tasksCompleted`, JSON.stringify(completedTasks));
-  }, [checkedTasks, email]);
+    localStorage.setItem('tasksCompleted', JSON.stringify(completedTasks));
+  }, [checkedTasks]);
 
   return (
     <>
