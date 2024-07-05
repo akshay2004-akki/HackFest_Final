@@ -1,30 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ setIsLoggedIn, setUser }) {
   const users = JSON.parse(localStorage.getItem("users"));
-  console.log(users);
 
-  const [loggedIn, setIsLoggedin] = useState(false)
-  const [loginDetails,setLoginDetails] = useState({
-    email : "",
-    password : "",
-  })
+  const [loginDetails, setLoginDetails] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleChange = (e)=>{
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
     setLoginDetails({
-      ...loggedIn,
-      [e.target.name] : e.target.value
-    })
-  }
+      ...loginDetails,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleLogin = (e) => {
-    e.preventDefault()
-    const user = users.find((u)=>u.email===loginDetails.email && u.password===loginDetails.password);
-    if(!user){
-      alert("Invalid credentials")
+    e.preventDefault();
+    const user = users.find((u) => u.email === loginDetails.email && u.password === loginDetails.password);
+    if (!user) {
+      alert("Invalid credentials");
+    } else {
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      localStorage.setItem('isLoggedIn', true);
+      setIsLoggedIn(true);
+      setUser(user);
+      alert("Login Successful");
+      navigate("/");
     }
-    setIsLoggedin(true)
-    localStorage.setItem('loggedInUser', JSON.stringify(user));    
   };
 
   return (

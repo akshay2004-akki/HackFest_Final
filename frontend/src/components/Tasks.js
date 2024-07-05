@@ -48,9 +48,9 @@ function Tasks({ credit, setCredit }) {
 
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    localStorage.setItem('numberOfTasks',tasksList.length)
-  },[])
+  useEffect(() => {
+    localStorage.setItem('numberOfTasks', tasksList.length);
+  }, []);
 
   useEffect(() => {
     const storedCredit = JSON.parse(localStorage.getItem('credit'));
@@ -68,16 +68,23 @@ function Tasks({ credit, setCredit }) {
   }, [uploadedImages]);
 
   useEffect(() => {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    const tasks = JSON.parse(localStorage.getItem("tasksCompleted"))
+    if (loggedInUser) {
+      const updatedUser = { ...loggedInUser, credit, tasks };
+      localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+      const users = JSON.parse(localStorage.getItem('users')).map(user =>
+        user.email === loggedInUser.email ? updatedUser : user
+      );
+      localStorage.setItem('users', JSON.stringify(users));
+    }
     localStorage.setItem('credit', JSON.stringify(credit));
   }, [credit]);
 
-  const handleCheckboxChange = (index,e) => {
-    
+  const handleCheckboxChange = (index) => {
     if (uploadedImages[index]) {
       const newCheckedTasks = [...checkedTasks];
-      // const completedTask = [...checkedTasks]
       newCheckedTasks[index] = !newCheckedTasks[index];
-      // completedTask[index] = e.target.value
       setCheckedTasks(newCheckedTasks);
 
       setTimeout(() => {
@@ -101,10 +108,11 @@ function Tasks({ credit, setCredit }) {
   const handleCreditNavigate = () => {
     navigate("/check-credit-score");
   };
-  useEffect(()=>{
+
+  useEffect(() => {
     const completedTasks = tasksList.filter((task, index) => checkedTasks[index]);
     localStorage.setItem('tasksCompleted', JSON.stringify(completedTasks));
-  },[checkedTasks])
+  }, [checkedTasks]);
 
   return (
     <>
@@ -118,7 +126,7 @@ function Tasks({ credit, setCredit }) {
                   <input
                     type="checkbox"
                     checked={checkedTasks[index]}
-                    onChange={(e) => handleCheckboxChange(index,e)}
+                    onChange={() => handleCheckboxChange(index)}
                     disabled={checkedTasks[index]}
                   />
                   {task}

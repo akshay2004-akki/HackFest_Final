@@ -793,3 +793,76 @@ text {
   font-weight: bold;
   color: #27ae60;
 }
+
+/* Profile.css */
+
+.profile-container {
+  transform: translateY(50px);
+  text-align: center;
+  padding: 20px;
+  /* margin: 0 auto; */
+  width: 100%;
+  /* max-width: 600px; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.logout-btn {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto 20px;
+}
+
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.tasks-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  width: 100%;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.tasks-container h2 {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.tasks-container p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    width: 100%;
+  }
+
+  .tasks-container p {
+    font-size: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .profile-container {
+    width: 100%;
+    padding: 0px;
+  }
+
+  .tasks-container p {
+    width: 100%;
+    font-size: 14px;
+  }
+}
