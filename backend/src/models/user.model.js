@@ -1,5 +1,6 @@
 import mongoose,{Schema} from 'mongoose'
 import bcrypt from 'bcrypt'
+import validator from 'validator'
 
 const userSchema = new Schema({
     username: {
@@ -28,6 +29,10 @@ const userSchema = new Schema({
       creditScore : {
         type:Number,
         default : 0
+      },
+      refreshToken : {
+        type:String,
+
       }
 },{timestamps:true})
 
@@ -39,6 +44,37 @@ userSchema.pre('save', async function(next){
 
 userSchema.methods.comparePassword = async function(password){
     return await bcrypt.compare(password,this.password)
+}
+
+userSchema.methods.getAccessToken = function () {
+    const token = jwt.sign(
+        {
+            _id: this._id,
+            email: this.email,
+            username: this.username,
+            role : this.role
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        }
+    );
+    console.log("Generated Access Token:", token);
+    return token;
+}
+
+userSchema.methods.getRefreshToken = function () {
+    const token = jwt.sign(
+        {
+            _id: this._id,
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        }
+    );
+    console.log("Generated Refresh Token:", token);
+    return token;
 }
 
 export const User = mongoose.model("User", userSchema);
