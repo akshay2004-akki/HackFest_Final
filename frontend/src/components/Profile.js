@@ -23,9 +23,14 @@ function Profile({ setIsLoggedIn }) {
     route("/login");
   };
 
+  const handleShowCreditCard = ()=>{
+    route("/credit-card")
+  }
+
   return (
     <div className="profile-container" style={{transform:"translateY(90px)"}}>
       <div className="username">{user?.username}</div>
+      <button className="btn btn-success" onClick={handleShowCreditCard}>View credit card</button>
       <button className="btn btn-danger logout-btn" onClick={handleLogout}>Logout</button>
       <div className="progress-container">
         <CircularProgress percentage={creditInPercentage} />

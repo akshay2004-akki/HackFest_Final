@@ -14,6 +14,7 @@ import GreenCreditCardForm from './components/GreenCreditCardForm.js';
 import CreditScore from './components/CreditScore.js';
 import Rewards from './components/Rewards.js';
 import Profile from './components/Profile.js';
+import GreenCard from './components/GreenCard.js';
 
 function App() {
   const [credit, setCredit] = useState(() => JSON.parse(localStorage.getItem('credit')) || 0);
@@ -49,6 +50,7 @@ function App() {
         <Route path='/check-credit-score' element = { <CreditScore credit={credit} /> } />
         <Route path="/rewards" element={<Rewards />} />
         <Route path='/profile' element={ <Profile setIsLoggedIn={setIsLoggedIn}/> } />
+        <Route path='/credit-card' element={<GreenCard/>} />
       </Routes>
     </Router>
   );

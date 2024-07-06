@@ -58,6 +58,59 @@ export const loginUser = asyncHandler(async(req,res)=>{
     if(!isPasswordCorrect){
         throw new ApiError(400,"incorrect Password")
     }
+    
+    const {accessToken, refreshToken} = await getAccessAndRefreshToken(user._id);
 
+    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
+
+    const options = {
+        httpOnly:true,
+        secure : false
+    }
+
+    return res
+            .status(200)
+            .cookie("accessToken", accessToken, options)
+            .cookie("refreshToken", refreshToken, options)
+            .json(
+                new ApiResponse(200, loggedInUser, "User Login successful")
+            )
+})
+
+export const logOutUser = asyncHandler(async (req, res)=>{
+    //remove cookies
+    //remove refresh token
+    await User.findByIdAndUpdate(req.user._id,
+        {
+            $unset : {
+                refreshToken : 1
+            }
+        },
+        {
+            new : true
+        }
+    )
+
+    const options = {
+        httpOnly : true,
+        secure : false
+    }
+
+    return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(
+        new ApiResponse(
+            200,{},"User loggedOut Successfully"
+        )
+    )
 
 })
+
+export const getUserDetails = asyncHandler(async(req,res)=>{
+    return res
+            .status(200)
+            .json( new ApiResponse(200, req.user, "user data fetched succesfully"))
+})
+
