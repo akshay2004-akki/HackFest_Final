@@ -17,6 +17,7 @@ const getAccessAndRefreshToken = async (userId)=>{
 
 export const registerUser = asyncHandler(async(req,res)=>{
     const {username, email, password, role} = req.body;
+    // console.log(req.body);
 
     if (
         [email, username, password, role].some((field) => field?.trim() === "")
@@ -65,7 +66,7 @@ export const loginUser = asyncHandler(async(req,res)=>{
 
     const options = {
         httpOnly:true,
-        secure : false
+        secure : true
     }
 
     return res
@@ -93,7 +94,7 @@ export const logOutUser = asyncHandler(async (req, res)=>{
 
     const options = {
         httpOnly : true,
-        secure : false
+        secure : true
     }
 
     return res

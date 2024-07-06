@@ -6,8 +6,8 @@ const organizationSchema = new mongoose.Schema({
     required: true,
   },
   contactPerson: {
-    type: String,
-    required: true,
+    type: mongoose.Types.ObjectId,
+    ref : "User",
   },
   email: {
     type: String,

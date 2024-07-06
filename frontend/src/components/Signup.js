@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 function Signup() {
   const [user, setUser] = useState({
@@ -8,17 +9,9 @@ function Signup() {
     role: "",
   });
 
-  const [users, setUsers] = useState(() => {
-    const savedUsers = localStorage.getItem("users");
-    return savedUsers ? JSON.parse(savedUsers) : [];
-  });
   const [error, setError] = useState("");
-  useEffect(() => {
-    console.log(users);
-    localStorage.setItem("users", JSON.stringify(users));
-  }, [users]);
+  const [success, setSuccess] = useState(false);
 
-  //const [role, setRole] = useState("")
   const handleChange = (e) => {
     setUser({
       ...user,
@@ -26,17 +19,21 @@ function Signup() {
     });
     setError("");
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const duplicateUser = users.find(
-      (u) => u.username === user.username || u.email === user.email
-    );
-    if (duplicateUser) {
-      setError("Username or email already exists.");
-      alert(error)
-    } 
-    else{
-      setUsers((prevUsers) => [...prevUsers, user]);
+    try {
+      const response = await axios.post("http://localhost:8000/api/v3/users/register", user, { withCredentials: true });
+      console.log(response);
+      setSuccess(true);
+      setUser({
+        username: "",
+        email: "",
+        password: "",
+        role: "",
+      });
+    } catch (error) {
+      setError(error.response.data.message || "An error occurred");
     }
   };
 
@@ -45,7 +42,7 @@ function Signup() {
       <div className="form-container2">
         <div className="form-box2">
           <h2>Signup</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               onChange={handleChange}
               name="username"
@@ -79,6 +76,7 @@ function Signup() {
               className="input-field"
               required
               onChange={handleChange}
+              value={user.role}
             >
               <option value="">Select Role</option>
               <option value="student">Student</option>
@@ -87,11 +85,12 @@ function Signup() {
             <button
               type="submit"
               className="submit-button"
-              onClick={handleSubmit}
             >
               Signup
             </button>
           </form>
+          {error && <div className="error">{error}</div>}
+          {success && <div className="success">Registration successful!</div>}
         </div>
       </div>
     </div>

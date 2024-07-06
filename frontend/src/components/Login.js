@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Login({ setIsLoggedIn, setUser }) {
-  const users = JSON.parse(localStorage.getItem("users"));
-
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
   });
+
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -16,20 +17,27 @@ function Login({ setIsLoggedIn, setUser }) {
       ...loginDetails,
       [e.target.name]: e.target.value,
     });
+    setError("");
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const user = users.find((u) => u.email === loginDetails.email && u.password === loginDetails.password);
-    if (!user) {
-      alert("Invalid credentials");
-    } else {
-      localStorage.setItem('loggedInUser', JSON.stringify(user));
-      localStorage.setItem('isLoggedIn', true);
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/v3/users/login", loginDetails, {
+        withCredentials: true,
+      });
+
+      const { data } = response;
+
       setIsLoggedIn(true);
-      setUser(user);
+      setUser(data.data);
       alert("Login Successful");
       navigate("/");
+    } catch (error) {
+      console.error(error);
+      setError("Invalid credentials");
+      alert("Invalid credentials");
     }
   };
 
@@ -61,6 +69,7 @@ function Login({ setIsLoggedIn, setUser }) {
               Login
             </button>
           </form>
+          {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
       </div>
     </div>
