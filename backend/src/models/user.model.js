@@ -31,14 +31,14 @@ const userSchema = new Schema({
         type:Number,
         default : 0
       },
-      tasksCompleted: {
-        type: [Boolean],
-        default: new Array(30).fill(false)
-      },
-      uploadedImages: {
-        type: [String],
-        default: new Array(30).fill(null)
-      },
+      // tasksCompleted: {
+      //   type: [Boolean],
+      //   default: new Array(30).fill(false)
+      // },
+      // uploadedImages: {
+      //   type: [String],
+      //   default: new Array(30).fill(null)
+      // },
       refreshToken : {
         type:String,
 

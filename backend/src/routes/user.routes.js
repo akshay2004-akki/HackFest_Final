@@ -9,7 +9,7 @@ router.route("/register").post(registerUser)
 router.route("/login").post(loginUser)
 router.route("/logout").post(verifyJWT, logOutUser)
 router.route("/user-details").get(verifyJWT,getUserDetails)
-router.put('/update-tasks', verifyJWT, upload.array('uploadedImages', 30), updateTasks);
+// router.put('/update-tasks', verifyJWT, upload.array('uploadedImages', 30), updateTasks);
 
 
 export default router
