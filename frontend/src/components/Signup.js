@@ -33,7 +33,7 @@ function Signup() {
         role: "",
       });
     } catch (error) {
-      setError(error.response.data.message || "An error occurred");
+      setError(error.response?.data?.message || "An error occurred");
     }
   };
 
@@ -89,8 +89,8 @@ function Signup() {
               Signup
             </button>
           </form>
-          {error && <div className="error">{error}</div>}
-          {success && <div className="success">Registration successful!</div>}
+          {error && <div className="error" style={{color:"red"}}>{error}</div>}
+          {success && <div className="success"style={{color:"white"}}>Registration successful!</div>}
         </div>
       </div>
     </div>

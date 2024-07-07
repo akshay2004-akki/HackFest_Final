@@ -1,5 +1,6 @@
-import React,{useState, useEffect} from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 import Navbar from './components/Navbar.js';
 import Service from './components/Service.js';
@@ -17,40 +18,44 @@ import Profile from './components/Profile.js';
 import GreenCard from './components/GreenCard.js';
 
 function App() {
-  const [credit, setCredit] = useState(() => JSON.parse(localStorage.getItem('credit')) || 0);
-
-  useEffect(() => {
-    localStorage.setItem('credit', JSON.stringify(credit));
-  }, [credit]);
-
+  const [credit, setCredit] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const loggedInStatus = localStorage.getItem('isLoggedIn');
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-
-    if (loggedInStatus) {
-      setIsLoggedIn(true);
-      setUser(loggedInUser);
+    async function checkAuth() {
+      try {
+        const response = await axios.get("http://localhost:8000/api/v3/users/user-details", {
+          withCredentials: true,
+        });
+        const userData = response.data.data;
+        setIsLoggedIn(true);
+        setUser(userData);
+        setCredit(userData.creditScore || 0);
+      } catch (error) {
+        console.error("Error checking auth:", error);
+        setIsLoggedIn(false);
+      }
     }
+    checkAuth();
   }, []);
+
   return (
     <Router>
       <Navbar isLoggedIn={isLoggedIn} user={user} />
-      <Routes> 
-        <Route path='/' element = { <> <Home/> <Footer/></> }></Route>
-        <Route path="/service" element={ <><Service /> <Footer/> </> }></Route>
-        <Route path="/about" element={<><About /> <Footer/></>} />
+      <Routes>
+        <Route path='/' element={<> <Home /> <Footer /></>} />
+        <Route path="/service" element={<><Service /> <Footer /></>} />
+        <Route path="/about" element={<><About /> <Footer /></>} />
         <Route path="/contact" element={<ContactUs />} />
-        <Route path='/tasks' element = {<> <Tasks credit={credit} setCredit={setCredit}/> <Footer/> </>}/>
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser}/>} />
+        <Route path='/tasks' element={isLoggedIn ? <> <Tasks credit={credit} setCredit={setCredit} /> <Footer /> </> : <Navigate to="/login" />} />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/apply-green-credit" element={<GreenCreditCardForm/>} />
-        <Route path='/check-credit-score' element = { <CreditScore credit={credit} /> } />
+        <Route path="/apply-green-credit" element={<GreenCreditCardForm />} />
+        <Route path='/check-credit-score' element={isLoggedIn ? <CreditScore credit={credit} /> : <Navigate to="/login" />} />
         <Route path="/rewards" element={<Rewards />} />
-        <Route path='/profile' element={ <Profile setIsLoggedIn={setIsLoggedIn}/> } />
-        <Route path='/credit-card' element={<GreenCard/>} />
+        <Route path='/profile' element={isLoggedIn ? <Profile setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/login" />} />
+        <Route path='/credit-card' element={isLoggedIn ? <GreenCard /> : <Navigate to="/login" />} />
       </Routes>
     </Router>
   );

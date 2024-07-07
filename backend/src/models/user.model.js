@@ -31,39 +31,14 @@ const userSchema = new Schema({
         type:Number,
         default : 0
       },
-      tasks : 
-        [
-          'Use public transportation instead of driving',
-          'Walk or bike for short trips',
-          'Carpool or ride-share when possible',
-          'Install energy-efficient light bulbs',
-          'Use a programmable thermostat',
-          'Reduce, reuse, and recycle',
-          'Avoid single-use plastics',
-          'Use reusable shopping bags',
-          'Compost food waste',
-          'Purchase energy-efficient appliances',
-          'Reduce water usage',
-          'Turn off lights when not in use',
-          'Unplug electronics when not in use',
-          'Wash clothes in cold water',
-          'Air-dry clothes instead of using a dryer',
-          'Install low-flow showerheads and faucets',
-          'Take shorter showers',
-          'Use a rain barrel to collect rainwater',
-          'Plant trees and native plants',
-          'Eat less meat',
-          'Buy local and seasonal produce',
-          'Reduce paper usage',
-          'Opt for digital receipts',
-          'Support renewable energy sources',
-          'Avoid fast fashion',
-          'Use a reusable water bottle',
-          'Support green businesses',
-          'Upgrade insulation in your home',
-          'Use a laptop instead of a desktop computer',
-          'Advocate for environmental policies'
-      ],
+      tasksCompleted: {
+        type: [Boolean],
+        default: new Array(30).fill(false)
+      },
+      uploadedImages: {
+        type: [String],
+        default: new Array(30).fill(null)
+      },
       refreshToken : {
         type:String,
 
