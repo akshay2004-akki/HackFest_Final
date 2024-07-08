@@ -796,76 +796,104 @@ text {
 
 /* Profile.css */
 
+/* Profile.css */
+
 .profile-container {
-  transform: translateY(50px);
-  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  /* margin: 0 auto; */
-  width: 100%;
-  /* max-width: 600px; */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f1f3f6;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.logout-btn {
-  display: block;
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto 20px;
-}
-
-.progress-container {
+.profile-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
-}
-
-.tasks-container {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: flex-start; */
-  width: 100%;
-  margin-top: 20px;
-  text-align: left;
-}
-
-.tasks-container h2 {
-  font-family: 'Ubuntu', sans-serif;
-}
-
-.tasks-container p {
-  font-family: 'Poppins', sans-serif;
-  font-size: 18px;
+  padding: 20px;
+  background: linear-gradient(to right, #60f160, #fff, #60f160);
+  color: #fff;
+  border-radius: 8px 8px 0 0;
 }
 
 .username {
   font-size: 24px;
   font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.profile-body {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 0 0 8px 8px;
+}
+
+.progress-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-  .profile-container {
-    width: 100%;
+.tasks-section {
+  width: 100%;
+}
+
+.tasks-section h2 {
+  margin-bottom: 10px;
+}
+
+.tasks-section p {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  border-left: 4px solid #2874f0;
+}
+
+/* Media queries for responsiveness */
+@media (min-width: 768px) {
+  .profile-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .tasks-container p {
-    font-size: 16px;
-  }
-}
-@media (max-width: 480px) {
-  .profile-container {
-    width: 100%;
-    padding: 0px;
+  .profile-body {
+    flex-direction: row;
   }
 
-  .tasks-container p {
-    width: 100%;
-    font-size: 14px;
+  .progress-section {
+    flex: 1;
+  }
+
+  .tasks-section {
+    flex: 2;
+    padding-left: 20px;
   }
 }
+
 
 
 .credit-card {

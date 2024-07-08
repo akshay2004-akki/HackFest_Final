@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import './Tasks.css'; // Assuming you have some CSS for the task list
+import axios from 'axios';
 
 const tasksList = [
   'Use public transportation instead of driving',
@@ -36,64 +36,57 @@ const tasksList = [
 ];
 
 function Tasks({ credit, setCredit }) {
-  const [checkedTasks, setCheckedTasks] = useState(() => {
-    const storedCheckedTasks = JSON.parse(localStorage.getItem('checkedTasks'));
-    return storedCheckedTasks || new Array(tasksList.length).fill(false);
-  });
-
-  const [uploadedImages, setUploadedImages] = useState(() => {
-    const storedUploadedImages = JSON.parse(localStorage.getItem('uploadedImages'));
-    return storedUploadedImages || new Array(tasksList.length).fill(null);
-  });
-
+  const [checkedTasks, setCheckedTasks] = useState(new Array(tasksList.length).fill(false));
+  const [uploadedImages, setUploadedImages] = useState(new Array(tasksList.length).fill(null));
+  const [tasks, setTasks] = useState([])
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem('numberOfTasks', tasksList.length);
-  }, []);
-
-  useEffect(() => {
-    const storedCredit = JSON.parse(localStorage.getItem('credit'));
-    if (storedCredit !== null) {
-      setCredit(storedCredit);
-    }
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/v3/users/user-details", {
+          withCredentials: true,
+        });
+        const user = response.data;
+        setCheckedTasks(user.tasksCompleted || new Array(tasksList.length).fill(false));
+        setUploadedImages(user.uploadedImages || new Array(tasksList.length).fill(null));
+        setCredit(user.creditScore || 0);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+    fetchUserData();
   }, [setCredit]);
 
-  useEffect(() => {
-    localStorage.setItem('checkedTasks', JSON.stringify(checkedTasks));
-  }, [checkedTasks]);
-
-  useEffect(() => {
-    localStorage.setItem('uploadedImages', JSON.stringify(uploadedImages));
-  }, [uploadedImages]);
-
-  useEffect(() => {
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    const tasks = JSON.parse(localStorage.getItem("tasksCompleted"))
-    if (loggedInUser) {
-      const updatedUser = { ...loggedInUser, credit, tasks };
-      localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
-      const users = JSON.parse(localStorage.getItem('users')).map(user =>
-        user.email === loggedInUser.email ? updatedUser : user
-      );
-      localStorage.setItem('users', JSON.stringify(users));
-    }
-    localStorage.setItem('credit', JSON.stringify(credit));
-  }, [credit]);
-
-  const handleCheckboxChange = (index) => {
+  const handleCheckboxChange = async (index) => {
     if (uploadedImages[index]) {
       const newCheckedTasks = [...checkedTasks];
       newCheckedTasks[index] = !newCheckedTasks[index];
       setCheckedTasks(newCheckedTasks);
 
-      setTimeout(() => {
-        if (newCheckedTasks[index]) {
-          setCredit(prevCred => prevCred + 10);
-        } else {
-          setCredit(prevCred => prevCred - 10);
-        }
-      }, 1000);
+      const updatedCredit = newCheckedTasks.filter(task => task).length * 10;
+      setCredit(updatedCredit);
+
+      // Update the database
+      try {
+        const formData = new FormData();
+        formData.append('tasksCompleted', JSON.stringify(newCheckedTasks));
+        formData.append('creditScore', updatedCredit);
+        uploadedImages.forEach((image, i) => {
+          if (image) {
+            formData.append('uploadedImages', image, image.name);
+          }
+        });
+
+        await axios.put("http://localhost:8000/api/v3/users/update-tasks", formData, {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      } catch (error) {
+        console.error('Error updating tasks:', error);
+      }
     } else {
       alert('Please upload an image to complete the task.');
     }
@@ -109,10 +102,23 @@ function Tasks({ credit, setCredit }) {
     navigate("/check-credit-score");
   };
 
-  useEffect(() => {
-    const completedTasks = tasksList.filter((task, index) => checkedTasks[index]);
-    localStorage.setItem('tasksCompleted', JSON.stringify(completedTasks));
-  }, [checkedTasks]);
+  useEffect(()=>{
+    async function getTaskDetails(){
+      try {
+      
+        const response = await axios.get("http://localhost:8000/api/v3/users/user-details", {withCredentials:true})
+        const userData = response.data.data;
+        const tasksCompleted = userData.tasksCompleted || [];
+        setTasks(tasksCompleted);
+  
+      } catch (error) {
+        console.error(error?.message)
+      }
+    }
+    getTaskDetails()
+  },[setCheckedTasks])
+
+  // const incompleteTasks = tasksList.filter((task,index)=>!tasks[index])
 
   return (
     <>
@@ -127,7 +133,7 @@ function Tasks({ credit, setCredit }) {
                     type="checkbox"
                     checked={checkedTasks[index]}
                     onChange={() => handleCheckboxChange(index)}
-                    disabled={checkedTasks[index]}
+                    disabled={tasks[index]}
                   />
                   {task}
                 </label>
