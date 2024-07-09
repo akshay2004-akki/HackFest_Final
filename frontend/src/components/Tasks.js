@@ -38,7 +38,6 @@ const tasksList = [
 function Tasks({ credit, setCredit }) {
   const [checkedTasks, setCheckedTasks] = useState(new Array(tasksList.length).fill(false));
   const [uploadedImages, setUploadedImages] = useState(new Array(tasksList.length).fill(null));
-  const [tasks, setTasks] = useState([])
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,11 +47,17 @@ function Tasks({ credit, setCredit }) {
           withCredentials: true,
         });
         const user = response.data;
-        setCheckedTasks(user.tasksCompleted || new Array(tasksList.length).fill(false));
-        setUploadedImages(user.uploadedImages || new Array(tasksList.length).fill(null));
-        setCredit(user.creditScore || 0);
+
+        const fetchedTasks = user.tasksCompleted || new Array(tasksList.length).fill(false);
+        const fetchedImages = user.uploadedImages || new Array(tasksList.length).fill(null);
+        const fetchedCredit = user.creditScore || 0;
+
+        setCheckedTasks(fetchedTasks);
+        setUploadedImages(fetchedImages);
+        setCredit(fetchedCredit);
       } catch (error) {
         console.error('Error fetching user data:', error);
+        alert('Failed to fetch user data. Please try again later.');
       }
     };
     fetchUserData();
@@ -67,7 +72,6 @@ function Tasks({ credit, setCredit }) {
       const updatedCredit = newCheckedTasks.filter(task => task).length * 10;
       setCredit(updatedCredit);
 
-      // Update the database
       try {
         const formData = new FormData();
         formData.append('tasksCompleted', JSON.stringify(newCheckedTasks));
@@ -84,8 +88,11 @@ function Tasks({ credit, setCredit }) {
             'Content-Type': 'multipart/form-data',
           },
         });
+
+        alert('Tasks updated successfully.');
       } catch (error) {
         console.error('Error updating tasks:', error);
+        alert('Failed to update tasks. Please try again later.');
       }
     } else {
       alert('Please upload an image to complete the task.');
@@ -93,32 +100,19 @@ function Tasks({ credit, setCredit }) {
   };
 
   const handleImageUpload = (index, event) => {
-    const newUploadedImages = [...uploadedImages];
-    newUploadedImages[index] = event.target.files[0];
-    setUploadedImages(newUploadedImages);
+    const file = event.target.files[0];
+    if (file && file.size < 5000000 && file.type.startsWith('image/')) { // 5MB limit
+      const newUploadedImages = [...uploadedImages];
+      newUploadedImages[index] = file;
+      setUploadedImages(newUploadedImages);
+    } else {
+      alert('Please upload a valid image file (max size: 5MB).');
+    }
   };
 
   const handleCreditNavigate = () => {
     navigate("/check-credit-score");
   };
-
-  useEffect(()=>{
-    async function getTaskDetails(){
-      try {
-      
-        const response = await axios.get("http://localhost:8000/api/v3/users/user-details", {withCredentials:true})
-        const userData = response.data.data;
-        const tasksCompleted = userData.tasksCompleted || [];
-        setTasks(tasksCompleted);
-  
-      } catch (error) {
-        console.error(error?.message)
-      }
-    }
-    getTaskDetails()
-  },[setCheckedTasks])
-
-  // const incompleteTasks = tasksList.filter((task,index)=>!tasks[index])
 
   return (
     <>
@@ -133,7 +127,7 @@ function Tasks({ credit, setCredit }) {
                     type="checkbox"
                     checked={checkedTasks[index]}
                     onChange={() => handleCheckboxChange(index)}
-                    disabled={tasks[index]}
+                    disabled={checkedTasks[index]}
                   />
                   {task}
                 </label>

@@ -19,9 +19,11 @@ app.use(express.urlencoded({extended:true, limit:"20kb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
-import userRouter from './routes/user.routes.js'
 
+import userRouter from './routes/user.routes.js'
+import orgCardRouter from './routes/organizationCreditCard.routes.js'
 
 app.use("/api/v3/users", userRouter)
+app.use("/api/v3/card", orgCardRouter)
 
 export default app

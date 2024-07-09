@@ -16,11 +16,16 @@ import CreditScore from './components/CreditScore.js';
 import Rewards from './components/Rewards.js';
 import Profile from './components/Profile.js';
 import GreenCard from './components/GreenCard.js';
+import OrganizationCreditCardForm from './components/OrganizationCreditCardForm.js';
+import OrganizationDetails from './components/OrganizationDetails.js';
 
 function App() {
   const [credit, setCredit] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [role, setRole] = useState("");
+
+  const [organizationId, setOrganizationId] = useState('');
 
   useEffect(() => {
     async function checkAuth() {
@@ -31,6 +36,7 @@ function App() {
         const userData = response.data.data;
         setIsLoggedIn(true);
         setUser(userData);
+        setRole(userData.role);
         setCredit(userData.creditScore || 0);
       } catch (error) {
         console.error("Error checking auth:", error);
@@ -49,13 +55,14 @@ function App() {
         <Route path="/about" element={<><About /> <Footer /></>} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path='/tasks' element={isLoggedIn ? <> <Tasks credit={credit} setCredit={setCredit} /> <Footer /> </> : <Navigate to="/login" />} />
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />} />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} setRole={setRole} />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/apply-green-credit" element={<GreenCreditCardForm />} />
+        <Route path="/apply-green-credit" element={role === "student" ? <GreenCreditCardForm /> : <OrganizationCreditCardForm organizationId = {organizationId} setOrganizationId={setOrganizationId} />} />
         <Route path='/check-credit-score' element={isLoggedIn ? <CreditScore credit={credit} /> : <Navigate to="/login" />} />
         <Route path="/rewards" element={<Rewards />} />
         <Route path='/profile' element={isLoggedIn ? <Profile setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/login" />} />
         <Route path='/credit-card' element={isLoggedIn ? <GreenCard /> : <Navigate to="/login" />} />
+        <Route path='/show-card-details/:organizationId' element = { <OrganizationDetails orgId = {organizationId} />} />
       </Routes>
     </Router>
   );

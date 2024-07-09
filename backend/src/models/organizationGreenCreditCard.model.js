@@ -1,12 +1,20 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const organizationSchema = new mongoose.Schema({
   organizationName: {
     type: String,
     required: true,
   },
+  cardNumber : {
+    type : Number,
+    required : true
+  },
+  // cardExpiry : {
+  //   type : Date,
+  //   // required : true
+  // },
   contactPerson: {
-    type: mongoose.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref : "User",
   },
   email: {

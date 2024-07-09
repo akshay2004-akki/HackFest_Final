@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Login({ setIsLoggedIn, setUser }) {
+function Login({ setIsLoggedIn, setUser, setRole }) {
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     password: "",
@@ -32,6 +32,7 @@ function Login({ setIsLoggedIn, setUser }) {
 
       setIsLoggedIn(true);
       setUser(data.data);
+      setRole(data.data.role);
       alert("Login Successful");
       navigate("/");
     } catch (error) {

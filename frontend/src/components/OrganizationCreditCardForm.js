@@ -1,9 +1,10 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function OrganizationCreditCardForm() {
+function OrganizationCreditCardForm({organizationId, setOrganizationId}) {
   const [formData, setFormData] = useState({
     organizationName: '',
-    contactPerson: '',
     email: '',
     phone: '',
     address: '',
@@ -12,6 +13,7 @@ function OrganizationCreditCardForm() {
     zip: '',
     taxId: ''
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -20,23 +22,43 @@ function OrganizationCreditCardForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
     console.log('Form submitted:', formData);
+
+    try {
+      const response = await axios.post("http://localhost:8000/api/v3/card/add", formData, { withCredentials: true });
+      console.log(response);
+      const orgId = response.data.data._id;
+      setOrganizationId(orgId);
+
+      // Store organization details in local storage with unique key
+      localStorage.setItem(`organizationDetails_${orgId}`, JSON.stringify(response.data.data));
+      localStorage.setItem(`${organizationId}_organizationId`, orgId);
+
+      // Navigate to show card details
+      // navigate(`/show-card-details/${orgId}`);
+    } catch (error) {
+      console.error(error?.message);
+    }
   };
 
+  const handleNavigate = ()=>{
+    const storedOrganizationId = localStorage.getItem(`${organizationId}_organizationId`) || organizationId;
+    if (storedOrganizationId) {
+      navigate(`/show-card-details/${storedOrganizationId}`);
+    } else {
+      alert("No organization ID found. Please submit the form first.");
+    }
+  }
+
   return (
-    <div className="green-credit-form-container" style={{transform:"translateY(50px)"}}>
+    <div className="green-credit-form-container" style={{ transform: "translateY(50px)" }}>
       <h2>Apply for Organization Credit Card</h2>
       <form onSubmit={handleSubmit} className="green-credit-form">
         <div className="green-credit-form-group">
           <label htmlFor="organizationName">Organization Name</label>
           <input type="text" id="organizationName" name="organizationName" value={formData.organizationName} onChange={handleChange} required />
-        </div>
-        <div className="green-credit-form-group">
-          <label htmlFor="contactPerson">Contact Person</label>
-          <input type="text" id="contactPerson" name="contactPerson" value={formData.contactPerson} onChange={handleChange} required />
         </div>
         <div className="green-credit-form-group">
           <label htmlFor="email">Email</label>
@@ -68,6 +90,8 @@ function OrganizationCreditCardForm() {
         </div>
         <button type="submit" className="green-credit-submit-btn">Submit</button>
       </form>
+
+      <button className="btn btn-success" onClick={handleNavigate}>Show card details</button>
     </div>
   );
 }
