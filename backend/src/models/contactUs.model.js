@@ -16,6 +16,13 @@ const contactSchema = new mongoose.Schema({
     },
     subject : {
         type : String,
+        required : true
+    },
+    message : {
+        type : String,
+        required : true
     }
 
 },{timestamps:true})
+
+export const ContactMessage = mongoose.model("ContactMessage", contactSchema)
