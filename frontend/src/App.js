@@ -18,12 +18,14 @@ import Profile from './components/Profile.js';
 import GreenCard from './components/GreenCard.js';
 import OrganizationCreditCardForm from './components/OrganizationCreditCardForm.js';
 import OrganizationDetails from './components/OrganizationDetails.js';
+import StudentCardDetails from './components/StudentCardDetails.js';
 
 function App() {
   const [credit, setCredit] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [role, setRole] = useState("");
+  const [studentId, setStudentId] = useState("")
 
   const [organizationId, setOrganizationId] = useState('');
 
@@ -57,12 +59,13 @@ function App() {
         <Route path='/tasks' element={isLoggedIn ? <> <Tasks credit={credit} setCredit={setCredit} /> <Footer /> </> : <Navigate to="/login" />} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} setRole={setRole} />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/apply-green-credit" element={role === "student" ? <GreenCreditCardForm /> : <OrganizationCreditCardForm organizationId = {organizationId} setOrganizationId={setOrganizationId} />} />
+        <Route path="/apply-green-credit" element={role === "student" ? <GreenCreditCardForm studentId = {studentId} setStudentId = {setStudentId} /> : <OrganizationCreditCardForm organizationId = {organizationId} setOrganizationId={setOrganizationId} />} />
         <Route path='/check-credit-score' element={isLoggedIn ? <CreditScore credit={credit} /> : <Navigate to="/login" />} />
         <Route path="/rewards" element={<Rewards />} />
         <Route path='/profile' element={isLoggedIn ? <Profile setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/login" />} />
         <Route path='/credit-card' element={isLoggedIn ? <GreenCard /> : <Navigate to="/login" />} />
         <Route path='/show-card-details/:organizationId' element = { <OrganizationDetails orgId = {organizationId} />} />
+        <Route path='/student/:studentId' element = {<StudentCardDetails studentId = {studentId}/>} /> 
       </Routes>
     </Router>
   );

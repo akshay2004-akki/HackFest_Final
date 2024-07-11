@@ -13,6 +13,10 @@ const organizationSchema = new mongoose.Schema({
   //   type : Date,
   //   // required : true
   // },
+  cvv : {
+    type : Number,
+    // required : true
+  },
   contactPerson: {
     type: Schema.Types.ObjectId,
     ref : "User",
