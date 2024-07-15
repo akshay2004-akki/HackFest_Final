@@ -23,9 +23,11 @@ app.use(cookieParser())
 import userRouter from './routes/user.routes.js'
 import orgCardRouter from './routes/organizationCreditCard.routes.js'
 import studentCardRouter from './routes/studentCredit.routes.js'
+import contactUs from './routes/contactUs.routes.js'
 
 app.use("/api/v3/users", userRouter)
 app.use("/api/v3/card", orgCardRouter)
 app.use("/api/v3/studentcard", studentCardRouter)
+app.use("/api/v3/contactUs", contactUs)
 
 export default app
