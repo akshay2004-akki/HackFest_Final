@@ -50,6 +50,10 @@ function Home() {
     };
   }, []);
 
+  const handleNavigate = ()=>{
+    route("/webinarForm")
+  }
+
   return (
     <>
       <div className="welcome" style={{transform:"translateY(50px)"}}>
@@ -62,6 +66,7 @@ function Home() {
           making a positive impact on the environment and earning rewards for
           your eco-friendly actions.
         </p>
+        <button className="btn btn-warning" onClick={handleNavigate}>Register for Webinar</button>
       </div>
       <div className="landing-page">
         <div className="container">

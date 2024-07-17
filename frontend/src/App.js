@@ -19,6 +19,7 @@ import GreenCard from './components/GreenCard.js';
 import OrganizationCreditCardForm from './components/OrganizationCreditCardForm.js';
 import OrganizationDetails from './components/OrganizationDetails.js';
 import StudentCardDetails from './components/StudentCardDetails.js';
+import Webinar from './components/Webinar.js';
 
 function App() {
   const [credit, setCredit] = useState(0);
@@ -66,6 +67,7 @@ function App() {
         <Route path='/credit-card' element={isLoggedIn ? <GreenCard /> : <Navigate to="/login" />} />
         <Route path='/show-card-details/:organizationId' element = { <OrganizationDetails orgId = {organizationId} />} />
         <Route path='/student/:studentId' element = {<StudentCardDetails studentId = {studentId}/>} /> 
+        <Route path='/webinarForm' element = { <Webinar/> }/>
       </Routes>
     </Router>
   );
