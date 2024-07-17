@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+
+// Helper function to generate the next 7 days' worth of date slots
+const generateDateSlots = (days = 7) => {
+  const dateSlots = [];
+  const today = new Date();
+  for (let i = 0; i < days; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    dateSlots.push(date.toISOString().split('T')[0]); // Get the date in YYYY-MM-DD format
+  }
+  return dateSlots;
+};
 
 function Webinar() {
   const [formData, setFormData] = useState({
@@ -7,7 +19,10 @@ function Webinar() {
     email: '',
     date: '',
     message: ''
-  }); 
+  });
+
+  const [error, setError] = useState('');
+  const [sentEmail, setSentEmail] = useState('');
 
   const handleChange = (e) => {
     setFormData({
@@ -15,9 +30,6 @@ function Webinar() {
       [e.target.name]: e.target.value
     });
   };
-
-  const [error, setError] = useState("")
-  const[sentEmail, setSentEmail] = useState("")
 
   useEffect(() => {
     const imageSlider = document.querySelector('.slider');
@@ -45,18 +57,16 @@ function Webinar() {
     // Handle form submission logic here
     console.log(formData);
     try {
-      await axios.post("http://localhost:8000/api/v3/webinar-register", formData, {withCredentials:true});
-      setSentEmail("An E-mail will be sent to your entered email")
-      setTimeout(()=>{
-        setSentEmail("")
-      },4000)
-      // console.log(response);
+      await axios.post("http://localhost:8000/api/v3/webinar-register", formData, { withCredentials: true });
+      setSentEmail("An E-mail will be sent to your entered email");
+      setTimeout(() => {
+        setSentEmail("");
+      }, 4000);
     } catch (error) {
-      // console.log(error?.message);
-      setError("Error : You have already registered for this date")
-      setTimeout(()=>{
-        setError("")
-      },4000)
+      setError("Error: You have already registered for this date");
+      setTimeout(() => {
+        setError("");
+      }, 4000);
     }
     setFormData({
       name: '',
@@ -66,10 +76,12 @@ function Webinar() {
     });
   };
 
+  const dateSlots = generateDateSlots();
+
   return (
     <div className="webinar-container" style={{ transform: 'translateY(50px)' }}>
       <div className="webinar-images">
-        <div className="slider" style={{ display: 'flex', transition: 'transform 0.5s', gap:"150px" }}>
+        <div className="slider" style={{ display: 'flex', transition: 'transform 0.5s', gap: "150px" }}>
           <img src="https://via.placeholder.com/150" alt="Surrounding 1" style={{ width: '12.5%' }} />
           <img src="https://via.placeholder.com/150" alt="Surrounding 2" style={{ width: '12.5%' }} />
           <img src="https://via.placeholder.com/150" alt="Surrounding 3" style={{ width: '12.5%' }} />
@@ -120,18 +132,24 @@ function Webinar() {
           </div>
           <div className="form-group3">
             <label htmlFor="date">Date:</label>
-            <input
-              type="date"
+            <select
               id="date"
               name="date"
               value={formData.date}
               onChange={handleChange}
               required
-            />
+            >
+              <option value="">Select a date</option>
+              {dateSlots.map((date) => (
+                <option key={date} value={date}>
+                  {new Date(date).toLocaleDateString()}
+                </option>
+              ))}
+            </select>
           </div>
           <button type="submit" className="submit-button3">Submit</button>
         </form>
-        <div className="error my-3" style={{color:"red", fontFamily:"Ubuntu"}}>{error || sentEmail}</div>
+        <div className="error my-3" style={{ color: "red", fontFamily: "Ubuntu" }}>{error || sentEmail}</div>
       </div>
     </div>
   );

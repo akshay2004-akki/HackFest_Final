@@ -9,7 +9,7 @@ const webinarSchema = new Schema({
     email : {
         type : String,
         required : [true, "Email is required"],
-        validate : [validator.isEmail,"Invalid Email"]
+        validate : [validator.isEmail,"Invalid Email"] 
     },
     date : {
         type : Date,
