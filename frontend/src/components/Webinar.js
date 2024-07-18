@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import wbinarImage1 from '../images/hackfest image.png'
+import webinarImage2 from '../images/hackfest image2.jpg'
+import webinarImage3 from '../images/hackfest image3.jpg'
 
 // Helper function to generate the next 7 days' worth of date slots
 const generateDateSlots = (days = 7) => {
@@ -82,9 +85,9 @@ function Webinar() {
     <div className="webinar-container" style={{ transform: 'translateY(50px)' }}>
       <div className="webinar-images">
         <div className="slider" style={{ display: 'flex', transition: 'transform 0.5s', gap: "150px" }}>
-          <img src="https://via.placeholder.com/150" alt="Surrounding 1" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 2" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 3" style={{ width: '12.5%' }} />
+          <img src={wbinarImage1} alt="Surrounding 1" style={{ width: '30%' }} />
+          <img src={webinarImage2} alt="Surrounding 2" style={{ width: '30%' }} />
+          <img src={webinarImage3} alt="Surrounding 3" style={{ width: '30%' }} />
           <img src="https://via.placeholder.com/150" alt="Surrounding 4" style={{ width: '12.5%' }} />
           <img src="https://via.placeholder.com/150" alt="Surrounding 1" style={{ width: '12.5%' }} />
           <img src="https://via.placeholder.com/150" alt="Surrounding 2" style={{ width: '12.5%' }} />

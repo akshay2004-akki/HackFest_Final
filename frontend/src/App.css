@@ -385,6 +385,19 @@
   min-height: 92.7vh;
   background: url(./images/pexels-nandhukumar-339614.jpg);
   background-size: cover;
+  position: relative;
+}
+.form-container::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: inherit;
+  background-size: cover;
+  background: rgba(0, 0, 0, 0.5) ; 
+  z-index: 1;
 }
 
 .form-box {
@@ -397,6 +410,7 @@
   width: 100%;
   box-sizing: border-box;
   text-align: center;
+  z-index: 3;
 }
 
 .form-box h2 {
@@ -455,6 +469,19 @@
   min-height: 92.7vh;
   background: url(./images/pexels-jakkel-418831.jpg);
   background-size: cover;
+  position: relative;
+}
+.form-container2::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: inherit;
+  background-size: cover;
+  background: rgba(0, 0, 0, 0.5) ; 
+  z-index: 1;
 }
 
 .form-box2 {
@@ -468,6 +495,7 @@
   width: 100%;
   box-sizing: border-box;
   text-align: center;
+  z-index: 3;
 }
 
 .form-box2 h2 {
