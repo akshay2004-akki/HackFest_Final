@@ -47,7 +47,7 @@ function Webinar() {
         imageSlider.style.transform = `translateX(0%)`;
       } else {
         imageSlider.style.transitionDuration = '0.4s';
-        imageSlider.style.transform = `translateX(-${currentIndex * 150 / totalImages}%)`;
+        imageSlider.style.transform = `translateX(-${currentIndex * 170 / totalImages}%)`;
       }
     };
 
@@ -84,28 +84,10 @@ function Webinar() {
   return (
     <div className="webinar-container" style={{ transform: 'translateY(50px)' }}>
       <div className="webinar-images">
-        <div className="slider" style={{ display: 'flex', transition: 'transform 0.5s', gap: "150px" }}>
-          <img src={wbinarImage1} alt="Surrounding 1" style={{ width: '30%' }} />
-          <img src={webinarImage2} alt="Surrounding 2" style={{ width: '30%' }} />
-          <img src={webinarImage3} alt="Surrounding 3" style={{ width: '30%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 4" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 1" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 2" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 3" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 4" style={{ width: '12.5%' }} />
-          {/* Cloned set of images for seamless transition */}
-          <img src="https://via.placeholder.com/150" alt="Surrounding 1" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 2" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 3" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 4" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 1" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 2" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 3" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 4" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 1" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 2" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 3" style={{ width: '12.5%' }} />
-          <img src="https://via.placeholder.com/150" alt="Surrounding 4" style={{ width: '12.5%' }} />
+        <div className="slider" style={{ display: 'flex', transition: 'transform 0.5s',gap: "120px"}}>
+          <img src={wbinarImage1} alt="Surrounding 1"  />
+          <img src={webinarImage2} alt="Surrounding 2"  />
+          <img src={webinarImage3} alt="Surrounding 3"  />
         </div>
       </div>
       <div className="webinar-form-container my-5">

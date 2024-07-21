@@ -27,6 +27,7 @@ function App() {
   const [user, setUser] = useState({});
   const [role, setRole] = useState("");
   const [studentId, setStudentId] = useState("")
+  // const [checkedTasks, setCheckedTasks] = useState([]);
 
   const [organizationId, setOrganizationId] = useState('');
 

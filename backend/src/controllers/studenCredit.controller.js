@@ -99,7 +99,7 @@ export const getStudentCardDetails = asyncHandler(async(req,res)=>{
         {
             $lookup : {
                 from : "users",
-                localField : "user",
+                localField : "user", 
                 foreignField : "_id",
                 as : "studentDetails"
             }

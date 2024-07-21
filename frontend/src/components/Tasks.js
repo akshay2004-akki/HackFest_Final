@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const tasksList = [
+const studentTasks = [
   'Use public transportation instead of driving',
   'Walk or bike for short trips',
-  'Carpool or ride-share when possible',
-  'Install energy-efficient light bulbs',
-  'Use a programmable thermostat',
-  'Reduce, reuse, and recycle',
+  'Use reusable water bottles',
+  'Participate in campus recycling programs',
+  'Use digital textbooks when possible',
+'Reduce, reuse, and recycle',
   'Avoid single-use plastics',
   'Use reusable shopping bags',
   'Compost food waste',
@@ -35,10 +35,54 @@ const tasksList = [
   'Advocate for environmental policies'
 ];
 
-function Tasks({ credit, setCredit }) {
-  const [checkedTasks, setCheckedTasks] = useState(new Array(tasksList.length).fill(false));
-  const [uploadedImages, setUploadedImages] = useState(new Array(tasksList.length).fill(null));
+const organizationTasks = [
+  'Implement a company-wide recycling program',
+  'Encourage remote work to reduce commuting',
+  'Use energy-efficient lighting in the office',
+  'Organize green initiatives for employees',
+  'Switch to eco-friendly office supplies',
+  "Upgrade to energy-efficient equipment and machinery.",
+  "Implement energy management systems.",
+  "Conduct regular energy audits to identify areas for improvement.",
+  "Use LED lighting and smart lighting systems.",
+  "Encourage carpooling, public transportation, biking, and walking among employees.",
+  "Transition to electric or hybrid company vehicles.",
+  "Implement telecommuting policies to reduce travel emissions.",
+  "Implement recycling and composting programs.",
+  "Reduce, reuse, and recycle materials used in operations.",
+  "Minimize packaging waste.",
+  "Regularly measure and report carbon emissions.",
+  "Set targets for reduction and track progress.",
+  "Use frameworks like the Carbon Disclosure Project (CDP) or Science-Based Targets initiative (SBTi).",
+  "Design and construct buildings to meet green building standards such as LEED or BREEAM.",
+  "Retrofit existing buildings with energy-efficient systems.",
+  "Invest in research and development for new technologies that reduce emissions.",
+  "Foster a culture of innovation focused on sustainability."
+
+];
+// function Tasks({ credit, setCredit }) {
+//   const [checkedTasks, setCheckedTasks] = useState(new Array(tasksList.length).fill(false));
+//   const [uploadedImages, setUploadedImages] = useState(new Array(tasksList.length).fill(null));
+//   const navigate = useNavigate();
+function Tasks({ setCredit }) {
+  const [tasksList, setTasksList] = useState([]);
+  const [checkedTasks, setCheckedTasks] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [role, setRole] = useState("student")
   const navigate = useNavigate();
+  
+  // useEffect(()=>{
+  //   const fetchRole = async ()=>{
+  //     const response = await axios.get()
+  //   }
+  // })
+
+  useEffect(() => {
+    const tasks = role === 'student' ? studentTasks : organizationTasks;
+    setTasksList(tasks);
+    setCheckedTasks(new Array(tasks.length).fill(false));
+    setUploadedImages(new Array(tasks.length).fill(null));
+  }, [role]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -48,9 +92,11 @@ function Tasks({ credit, setCredit }) {
         });
         const user = response.data;
 
-        const fetchedTasks = user.tasksCompleted || new Array(tasksList.length).fill(false);
+        setRole(user?.data?.role)
+
+        const fetchedTasks = user.data.tasksCompleted || new Array(tasksList.length).fill(false);
         const fetchedImages = user.uploadedImages || new Array(tasksList.length).fill(null);
-        const fetchedCredit = user.creditScore || 0;
+        const fetchedCredit = user.data.creditScore || 0;
 
         setCheckedTasks(fetchedTasks);
         setUploadedImages(fetchedImages);
@@ -61,7 +107,7 @@ function Tasks({ credit, setCredit }) {
       }
     };
     fetchUserData();
-  }, [setCredit]);
+  }, []);
 
   const handleCheckboxChange = async (index) => {
     if (uploadedImages[index]) {
@@ -71,7 +117,6 @@ function Tasks({ credit, setCredit }) {
 
       const updatedCredit = newCheckedTasks.filter(task => task).length * 10;
       setCredit(updatedCredit);
-
       try {
         const formData = new FormData();
         formData.append('tasksCompleted', JSON.stringify(newCheckedTasks));

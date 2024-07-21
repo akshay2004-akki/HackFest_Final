@@ -117,38 +117,36 @@ export const getUserDetails = asyncHandler(async (req, res) => {
 });
 
 export const updateTasks = asyncHandler(async (req, res) => {
-    const userId = req.user?._id;
-    const { tasksCompleted, creditScore } = req.body;
-    const uploadedImages = req.files;
-  
-    if (!tasksCompleted || creditScore === undefined) {
-      throw new ApiError(404, "Missing required fields");
+  const userId = req.user?._id;
+  const { tasksCompleted, creditScore } = req.body;
+  const uploadedImages = req.files;
+
+  if (!tasksCompleted || creditScore === undefined) {
+    throw new ApiError(404, "Missing required fields");
+  }
+
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new ApiError(404, "User Does Not exist");
+  }
+
+  user.tasksCompleted = JSON.parse(tasksCompleted);
+  user.creditScore = creditScore;
+
+  // Initialize uploadedImages array if not present
+  if (!user.uploadedImages) {
+    user.uploadedImages = new Array(user.tasksCompleted.length).fill(null);
+  }
+
+  // Loop through uploaded images, upload to Cloudinary, and update user's uploadedImages
+  for (let i = 0; i < uploadedImages.length; i++) {
+    if (uploadedImages[i]) {
+      const imageUrl = await uploadOnCloudinary(uploadedImages[i].path);
+      user.uploadedImages[i] = imageUrl?.url;
     }
-  
-    const user = await User.findById(userId);
-    if (!user) {
-      throw new ApiError(404, "User Does Not exist");
-    }
-  
-    user.tasksCompleted = JSON.parse(tasksCompleted);
-    user.creditScore = creditScore;
-  
-    // Initialize uploadedImages array if not present
-    if (!user.uploadedImages) {
-      user.uploadedImages = new Array(user.tasksCompleted.length).fill(null);
-    }
-  
-    // Loop through uploaded images, upload to Cloudinary, and update user's uploadedImages
-    for (let i = 0; i < uploadedImages.length; i++) {
-      if (uploadedImages[i]) {
-        const imageUrl = await uploadOnCloudinary(uploadedImages[i].path);
-        user.uploadedImages[i] = imageUrl.url;
-      }
-    }
-  
-    await user.save();
-  
-    return res
-      .status(200)
-      .json(new ApiResponse(200, user, "Tasks and credit score updated successfully"));
-  });
+  }
+
+  await user.save();
+
+  return res.status(200).json(new ApiResponse(200, user, "Tasks and credit score updated successfully"));
+});

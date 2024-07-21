@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const rewardsList = [
   { category: 'Eco-Friendly Products', items: [
@@ -65,8 +65,16 @@ const rewardsList = [
 ];
 
 function Rewards() {
-
-    const credit = JSON.parse(localStorage.getItem('credit'));
+  const [credit, setCredit] = useState(0)
+  useEffect(()=>{
+    const fetchData = async ()=>{
+      const response = await axios.get("http://localhost:8000/api/v3/users/user-details",{withCredentials:true})
+      const score = response.data.data.creditScore;
+      setCredit(score)
+    }
+    fetchData()
+  },[])
+    
   return (
     <div className="rewards-container">
       {rewardsList.map((category, catIndex) => (
