@@ -55,7 +55,7 @@ export const regiterWbinar = asyncHandler(async(req,res)=>{
     })
     // console.log(process.env.EMAIL_USER,);
     try {
-        sendEmail(email,"Webinar Registration Confirmation", `Hi ${name},\n\nYou have successfully registered for the webinar on ${parsedDate.toLocaleDateString()}.\n Your Time slot is 5pm - 6pm.\n\nBest Regards,\nWebinar Team`)
+        sendEmail(email,"Webinar Registration Confirmation", `Hi ${name},\n\nYou have successfully registered for the webinar on ${parsedDate.toLocaleDateString()}.\n Your Time slot is 5pm - 6pm.\n\nBest Regards,\nTeam EcoFIN`)
     } catch (error) {
         console.log(error?.message);
     }

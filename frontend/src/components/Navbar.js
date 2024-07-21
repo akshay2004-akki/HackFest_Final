@@ -1,13 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; 
+import logo4 from '../images/logo8.png'
 
 function Navbar({ isLoggedIn, user }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/" style={{ display: "flex", alignItems: "center" }}>
-          <img src="https://img.icons8.com/fluency/344/green-earth.png" alt="Green Project India" style={{ height: '30px', marginRight: '10px' }} />
-          <span style={{ fontFamily: "Poppins" }}>Green Project India</span>
+          <img src={logo4} alt="Green Project India" style={{ height: "30px", marginRight: '10px'}} />
+          <span style={{ fontFamily: "Poppins" }}>EcoFin.com</span>
         </NavLink>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
