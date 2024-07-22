@@ -58,7 +58,6 @@ const organizationTasks = [
   "Retrofit existing buildings with energy-efficient systems.",
   "Invest in research and development for new technologies that reduce emissions.",
   "Foster a culture of innovation focused on sustainability."
-
 ];
 // function Tasks({ credit, setCredit }) {
 //   const [checkedTasks, setCheckedTasks] = useState(new Array(tasksList.length).fill(false));

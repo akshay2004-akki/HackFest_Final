@@ -20,6 +20,7 @@ import OrganizationCreditCardForm from './components/OrganizationCreditCardForm.
 import OrganizationDetails from './components/OrganizationDetails.js';
 import StudentCardDetails from './components/StudentCardDetails.js';
 import Webinar from './components/Webinar.js';
+import OrgRewards from './components/OrgRewards.js';
 
 function App() {
   const [credit, setCredit] = useState(0);
@@ -63,7 +64,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/apply-green-credit" element={role === "student" ? <GreenCreditCardForm studentId = {studentId} setStudentId = {setStudentId} /> : <OrganizationCreditCardForm organizationId = {organizationId} setOrganizationId={setOrganizationId} />} />
         <Route path='/check-credit-score' element={isLoggedIn ? <CreditScore credit={credit} /> : <Navigate to="/login" />} />
-        <Route path="/rewards" element={<Rewards />} />
+        <Route path="/rewards" element={role==="student" ? <Rewards /> : <OrgRewards/> } />
         <Route path='/profile' element={isLoggedIn ? <Profile setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/login" />} />
         <Route path='/credit-card' element={isLoggedIn ? <GreenCard /> : <Navigate to="/login" />} />
         <Route path='/show-card-details/:organizationId' element = { <OrganizationDetails orgId = {organizationId} />} />
