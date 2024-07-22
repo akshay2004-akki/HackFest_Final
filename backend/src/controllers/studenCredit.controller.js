@@ -14,8 +14,6 @@ const algorithm = 'aes-256-cbc';
 const secretKey = process.env.CRYPTO_SECRET_KEY
 
 const encrypt = (text) => {
-    console.log("secret key : ",secretKey);
-
     const iv = crypto.randomBytes(16);
     const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
     let encrypted = cipher.update(text.toString(), 'utf8', 'hex');
@@ -111,7 +109,6 @@ export const getStudentCardDetails = asyncHandler(async(req,res)=>{
     if (studentDetails.length === 0) {
         throw new ApiError(404, "Student not found");
     }
-    console.log(studentDetails);
     studentDetails[0].cvv = decrypt(studentDetails[0].cvv);
     return res.status(200).json(new ApiResponse(200, studentDetails[0], "Student all details fetched"))
 })

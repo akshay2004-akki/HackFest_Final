@@ -73,7 +73,6 @@ export const getOrganizationDetails = asyncHandler(async (req, res) => {
       },
       { $unwind: '$contactPersonDetails' }
     ]);
-    console.log(organization);
     if (!organization.length) {
       throw new ApiError(404, "Organization not found");
     }

@@ -15,7 +15,6 @@ function OrganizationDetails({ orgId }) {
     const fetchOrganizationDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:8000/api/v3/card/${storedOrganizationId}`, { withCredentials: true });
-        console.log(response);
         setOrganization(response.data.data);
         setOrg(response.data.data);
         setLoading(false);

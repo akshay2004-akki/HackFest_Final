@@ -25,7 +25,6 @@ function GreenCreditCardForm({studentId, setStudentId}) {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8000/api/v3/studentcard/student-credit', formData, { withCredentials: true });
-      console.log('Form submitted:', response.data);
       const stuId = response.data.data?._id;
       setStudentId(stuId);
 
@@ -40,7 +39,6 @@ function GreenCreditCardForm({studentId, setStudentId}) {
 
   const handleNavigate = () => {
     const storedStudentId = localStorage.getItem(`studentId`) || studentId ;
-    console.log(storedStudentId);
     if (storedStudentId) {
       route(`/student/${storedStudentId}`);
     } else {

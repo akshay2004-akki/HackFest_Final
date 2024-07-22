@@ -42,7 +42,7 @@ function OrgRewards() {
             const res = await axios.get("http://localhost:8000/api/v3/users/user-details",{withCredentials:true})
             const user = res.data?.data;
             setCredit(user?.creditScore);
-            console.log(credit);
+            
         }
         fetchData()
     },[])

@@ -28,7 +28,7 @@ const sendEmail = (to,subject, text)=>{
         if (error) {
           console.error('Error sending email:', error);
         } else {
-          console.log('Email sent:', info.response);
+          console.error('Email sent:', info.response);
         }
       });
 }
@@ -53,11 +53,11 @@ export const regiterWbinar = asyncHandler(async(req,res)=>{
         email,
         date : parsedDate
     })
-    // console.log(process.env.EMAIL_USER,);
+    
     try {
         sendEmail(email,"Webinar Registration Confirmation", `Hi ${name},\n\nYou have successfully registered for the webinar on ${parsedDate.toLocaleDateString()}.\n Your Time slot is 5pm - 6pm.\n\nBest Regards,\nTeam EcoFIN`)
     } catch (error) {
-        console.log(error?.message);
+        console.error(error?.message);
     }
     return res.status(200).json(new ApiResponse(201, newWebinar,"Registered for webinar successfully"))
 })

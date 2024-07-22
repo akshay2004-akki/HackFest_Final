@@ -15,7 +15,7 @@ function Footer() {
           </div>
           <div className="footer-section contact">
             <h3>Contact Us</h3>
-            <p>Email : </p>
+            <p>Email : ecofinindia2024@gmail.com </p>
             <p>Phone: +91 1234567890</p>
             <p>Address: 123 Green Street, New Delhi, India</p>
           </div>

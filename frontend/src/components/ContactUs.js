@@ -22,7 +22,6 @@ function ContactUs() {
     try {
       const response = await axios.post('http://localhost:8000/api/v3/contactUs', formData);
       setResponseMessage(response.data.message);
-      console.log("email sent");
       setFormData({
         name: '',
         email: '',

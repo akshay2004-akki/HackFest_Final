@@ -24,12 +24,11 @@ function OrganizationCreditCardForm({organizationId, setOrganizationId}) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    
 
     try {
       const response = await axios.post("http://localhost:8000/api/v3/card/add", formData, { withCredentials: true });
-      console.log(response);
-      const orgId = response.data.data._id;
+      const orgId = response.data?.data?._id;
       setOrganizationId(orgId);
 
       // Store organization details in local storage with unique key

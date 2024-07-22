@@ -58,7 +58,6 @@ function Webinar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
-    console.log(formData);
     try {
       await axios.post("http://localhost:8000/api/v3/webinar-register", formData, { withCredentials: true });
       setSentEmail("An E-mail will be sent to your entered email");
