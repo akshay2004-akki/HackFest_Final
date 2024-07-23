@@ -20,7 +20,7 @@ function ContactUs() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/v3/contactUs', formData);
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_PORT}/api/v3/contactUs`, formData);
       setResponseMessage(response.data.message);
       setFormData({
         name: '',

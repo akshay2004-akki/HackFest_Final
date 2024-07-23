@@ -68,7 +68,7 @@ function Rewards() {
   const [credit, setCredit] = useState(0)
   useEffect(()=>{
     const fetchData = async ()=>{
-      const response = await axios.get("http://localhost:8000/api/v3/users/user-details",{withCredentials:true})
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_PORT}/api/v3/users/user-details`,{withCredentials:true})
       const score = response.data.data.creditScore;
       setCredit(score)
     }

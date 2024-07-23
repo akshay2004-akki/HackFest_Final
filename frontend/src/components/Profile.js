@@ -73,7 +73,7 @@ function Profile({ setIsLoggedIn }) {
 
   useEffect(()=>{
     const fetchrole = async()=>{
-      const res = await axios.get("http://localhost:8000/api/v3/users/user-details", {withCredentials:true});
+      const res = await axios.get(`${process.env.REACT_APP_SERVER_PORT}/api/v3/users/user-details`, {withCredentials:true});
       setRole(res.data?.data?.role) 
     }
     fetchrole()
@@ -82,7 +82,7 @@ function Profile({ setIsLoggedIn }) {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("http://localhost:8000/api/v3/users/user-details", {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_PORT}/api/v3/users/user-details`, {
           withCredentials: true,
         });
         const userData = response.data.data;
@@ -109,7 +109,7 @@ function Profile({ setIsLoggedIn }) {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:8000/api/v3/users/logout", {}, {
+      await axios.post(`${process.env.REACT_APP_SERVER_PORT}/api/v3/users/logout`, {}, {
         withCredentials: true,
       });
       setIsLoggedIn(false);

@@ -59,7 +59,7 @@ function Webinar() {
     e.preventDefault();
     // Handle form submission logic here
     try {
-      await axios.post("http://localhost:8000/api/v3/webinar-register", formData, { withCredentials: true });
+      await axios.post(`${process.env.REACT_APP_SERVER_PORT}/api/v3/webinar-register`, formData, { withCredentials: true });
       setSentEmail("An E-mail will be sent to your entered email");
       setTimeout(() => {
         setSentEmail("");

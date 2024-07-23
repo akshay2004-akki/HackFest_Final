@@ -39,7 +39,7 @@ function OrgRewards() {
     const [credit, setCredit] = useState("student")
     useEffect(()=>{
         const fetchData = async()=>{
-            const res = await axios.get("http://localhost:8000/api/v3/users/user-details",{withCredentials:true})
+            const res = await axios.get(`${process.env.REACT_APP_SERVER_PORT}/api/v3/users/user-details`,{withCredentials:true})
             const user = res.data?.data;
             setCredit(user?.creditScore);
             

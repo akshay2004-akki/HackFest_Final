@@ -22,6 +22,7 @@ import StudentCardDetails from './components/StudentCardDetails.js';
 import Webinar from './components/Webinar.js';
 import OrgRewards from './components/OrgRewards.js';
 
+
 function App() {
   const [credit, setCredit] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);

@@ -23,7 +23,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8000/api/v3/users/register", user, { withCredentials: true });
+      await axios.post(`${process.env.REACT_APP_SERVER_PORT}/api/v3/users/register`, user, { withCredentials: true });
       setSuccess(true);
       setUser({
         username: "",

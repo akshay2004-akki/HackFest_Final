@@ -24,7 +24,7 @@ function GreenCreditCardForm({studentId, setStudentId}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/v3/studentcard/student-credit', formData, { withCredentials: true });
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_PORT}/api/v3/studentcard/student-credit`, formData, { withCredentials: true });
       const stuId = response.data.data?._id;
       setStudentId(stuId);
 
