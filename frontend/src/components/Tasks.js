@@ -126,7 +126,7 @@ function Tasks({ setCredit }) {
           }
         });
 
-        await axios.put("http://localhost:8000/api/v3/users/update-tasks", formData, {
+        await axios.put(`${process.env.REACT_APP_SERVER_PORT}/api/v3/users/update-tasks`, formData, {
           withCredentials: true,
           headers: {
             'Content-Type': 'multipart/form-data',
