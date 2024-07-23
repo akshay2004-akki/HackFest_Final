@@ -69,7 +69,8 @@ export const loginUser = asyncHandler(async (req, res) => {
   );
 
   const options = {
-    httpOnly: false,
+    httpOnly: true,
+    sameSite: "Strict",
     secure: true,
   };
 
@@ -96,7 +97,7 @@ export const logOutUser = asyncHandler(async (req, res) => {
   );
 
   const options = {
-    httpOnly: false,
+    httpOnly: true,
     sameSite: "Strict",
     secure: true,
   };
