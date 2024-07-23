@@ -70,8 +70,9 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: false,
-    sameSite: "Strict",
+    sameSite: "Lax",
     secure: true,
+    domain : ".onrender.com"
   };
 
   return res
