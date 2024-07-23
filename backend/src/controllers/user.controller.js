@@ -109,6 +109,7 @@ export const logOutUser = asyncHandler(async (req, res) => {
 });
 
 export const getUserDetails = asyncHandler(async (req, res) => {
+  console.log("cookies : ",req.cookies);
   return res
     .status(200)
     .json(new ApiResponse(200, req.user, "user data fetched succesfully"));
