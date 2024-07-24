@@ -4,9 +4,9 @@ function About() {
   return (
     <div className="about-section" style={{transform:"translateY(70px)"}}>
       <div className="container">
-        <h2>About Green Project India</h2>
+        <h2>About EcoFIN India</h2>
         <p>
-          Green Project India is committed to promoting environmental sustainability through a multi-faceted approach. Our mission is to encourage individuals and organizations to reduce their carbon footprint by participating in our innovative green credit system. We focus on creating lasting environmental benefits, raising public awareness, and ensuring transparency and regulatory oversight in all green credit activities.
+          EcoFin India is committed to promoting environmental sustainability through a multi-faceted approach. Our mission is to encourage individuals and organizations to reduce their carbon footprint by participating in our innovative green credit system. We focus on creating lasting environmental benefits, raising public awareness, and ensuring transparency and regulatory oversight in all green credit activities.
         </p>
         <h3>Key Aspects of Our Approach:</h3>
         <ul>

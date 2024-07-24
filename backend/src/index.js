@@ -11,9 +11,9 @@ connectDB()
         console.error("error occured database connection failed", err)
     })
     app.listen(process.env.PORT, ()=>{
-        
+        console.log(`listining on port : ${process.env.PORT}`);
     })
 })
 .catch((err)=>{
-    console.error("connection to database failed ", err)
+    console.error("connection to database failed ", err) 
 })

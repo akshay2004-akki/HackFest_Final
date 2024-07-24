@@ -16,7 +16,7 @@ function Home() {
   }
 
   useEffect(() => {
-    const typewriterText = "Welcome to Green Project India";
+    const typewriterText = "Welcome to EcoFin India";
     const speed = 100; // typing speed in milliseconds
     const delay = 2000; // delay before restarting the typing
 
@@ -59,7 +59,7 @@ function Home() {
       <div className="welcome" style={{transform:"translateY(50px)"}}>
         <h1 ref={typewriterRef} className="typewriter-text">.</h1>
         <p style={{fontSize:"21px", fontFamily:"Poppins"}}>
-          At Green Project India, we are dedicated to promoting environmental
+          At EcoFin, we are dedicated to promoting environmental
           sustainability. Our mission is to encourage individuals and
           organizations to take proactive steps in reducing their carbon
           footprint through our innovative green credit system. Join us in
@@ -74,7 +74,7 @@ function Home() {
             <div className="content">
               <h1 style={{fontFamily:"Ubuntu"}}>Green Credit</h1>
               <p style={{fontFamily:"Poppins"}}>
-                At Green Project India, we believe that promoting environmental
+                At EcoFIN India, we believe that promoting environmental
                 sustainability is everyone's responsibility. That's why we've
                 developed an innovative green credit management system that
                 incentivizes individuals and organizations to contribute towards

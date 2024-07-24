@@ -143,6 +143,7 @@ export const updateTasks = asyncHandler(async (req, res) => {
   // Loop through uploaded images, upload to Cloudinary, and update user's uploadedImages
   for (let i = 0; i < uploadedImages.length; i++) {
     if (uploadedImages[i]) {
+      console.log("Local image path : ",uploadedImages[i].path);
       const imageUrl = await uploadOnCloudinary(uploadedImages[i].path);
       user.uploadedImages[i] = imageUrl?.url;
     }
