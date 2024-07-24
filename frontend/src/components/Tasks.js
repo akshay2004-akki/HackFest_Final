@@ -93,9 +93,9 @@ function Tasks({ setCredit }) {
 
         setRole(user?.data?.role)
 
-        const fetchedTasks = user.data.tasksCompleted || new Array(tasksList.length).fill(false);
+        const fetchedTasks = user.data?.tasksCompleted || new Array(tasksList.length).fill(false);
         const fetchedImages = user.uploadedImages || new Array(tasksList.length).fill(null);
-        const fetchedCredit = user.data.creditScore || 0;
+        const fetchedCredit = user.data?.creditScore || 0;
 
         setCheckedTasks(fetchedTasks);
         setUploadedImages(fetchedImages);
